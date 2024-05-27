@@ -1,0 +1,14 @@
+how am I going to do animated text in react
+
+how do I want it to present
+
+1) 1 seecond passes
+2) text animates in at a constant speed
+3) text finishes animates
+4) this show cases the questions
+
+this is a difficulty because I need to "initate" the child component
+
+1) first build the a deterministic animation without state
+2) then use a timestmp offset to offset the animation
+3) then set up triggers outside of component to assign that offset
