@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ReactFlag } from '../utility/Flag';
+import { UseTriggerWatch } from '../hooks/useTrigger';
 
 export interface AnimatedTextProps {
   state?: 'off' | 'playing' | 'force_on';
   
-  resetAnimation: ReactFlag;
+  resetAnimation: UseTriggerWatch;
   
   children: string;
 }
@@ -15,13 +15,11 @@ function AnimatedText(props: AnimatedTextProps) {
   const [tick, setTick] = useState({});
   const [start, setStart] = useState(Date.now() / 1000);
 
-  props.resetAnimation.On(() => {
-    setTimeout(() => {
-      console.log("re setting start");
-      console.log(Date.now() / 1000)
-      setStart(Date.now() / 1000);  
-    }, 10)
-  })
+  useEffect(() => {
+    console.log("re setting start");
+    console.log(Date.now() / 1000);
+    setStart(Date.now() / 1000);
+  }, [props.resetAnimation.watch]);
 
   console.log(start)
 

@@ -2,20 +2,22 @@ import React, { useContext } from 'react';
 import { AppStateContext } from '../App';
 import Container from '../components/Container';
 import AnimatedText from '../components/AnimatedText';
-import { ReactFlag } from '../utility/Flag';
+import { useTrigger } from '../hooks/useTrigger';
 
 function PageQuestions() {
   console.log("PageQuestions");
 
   const appContext = React.useContext(AppStateContext);
-  const resetAnimationFlag = new ReactFlag();
+  const [startAnimationEvent, startAnimationHandle] = useTrigger();
 
   return (
     <Container>
       <div className="w-[250px]">
         <p>
-          <AnimatedText state={"playing"} resetAnimation={resetAnimationFlag}>Hello World</AnimatedText>
-          <button onClick={() => resetAnimationFlag.Raise()}>Trigger Animation!</button>
+          <AnimatedText state={"playing"} resetAnimation={startAnimationHandle}>Hello World</AnimatedText>
+          <AnimatedText state={"playing"} resetAnimation={startAnimationHandle}>Hello World</AnimatedText>
+          <br/>
+          <button onClick={() => startAnimationEvent.invoke()}>Trigger Animation!</button>
         </p>
       </div>
     </Container>
