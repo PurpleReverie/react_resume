@@ -22,6 +22,7 @@ function AnimatedText(props: AnimatedTextProps) {
     console.log('re setting start');
     console.log(Date.now() / 1000);
     setStart(Date.now() / 1000);
+    setFiredFinishedLambda(false);
   }, [props?.resetAnimation?.watch]);
 
   const rate = 0.1;
@@ -45,7 +46,7 @@ function AnimatedText(props: AnimatedTextProps) {
         return initialText.slice(
           0,
           initialText.length * currentPercentageComplete,
-      );
+        );
       case 'force_on':
         return initialText;
       default:
@@ -60,9 +61,12 @@ function AnimatedText(props: AnimatedTextProps) {
   if (writtenText.length === initialText.length) {
     if (firedFinishedLambda === false) {
       setFiredFinishedLambda(true);
-      if (props.OnFinishAnimation !== undefined) {
-        props.OnFinishAnimation();
-      }
+
+      setTimeout(() => {
+        if (props.OnFinishAnimation !== undefined) {
+          props.OnFinishAnimation();
+        }
+      }, 1);
     }
   }
 
