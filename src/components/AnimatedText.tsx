@@ -3,9 +3,11 @@ import { UseTriggerWatch } from '../hooks/useTrigger';
 
 export interface AnimatedTextProps {
   state?: 'off' | 'playing' | 'force_on';
-  
-  resetAnimation: UseTriggerWatch;
-  
+
+  resetAnimation?: UseTriggerWatch;
+
+  OnFinishAnimation?: () => void;
+
   children: string;
 }
 
@@ -14,14 +16,13 @@ function AnimatedText(props: AnimatedTextProps) {
 
   const [tick, setTick] = useState({});
   const [start, setStart] = useState(Date.now() / 1000);
+  const [firedFinishedLambda, setFiredFinishedLambda] = useState(false);
 
   useEffect(() => {
-    console.log("re setting start");
+    console.log('re setting start');
     console.log(Date.now() / 1000);
     setStart(Date.now() / 1000);
-  }, [props.resetAnimation.watch]);
-
-  console.log(start)
+  }, [props?.resetAnimation?.watch]);
 
   const rate = 0.1;
   const duration = initialText.length * rate;
@@ -33,33 +34,53 @@ function AnimatedText(props: AnimatedTextProps) {
     1,
   );
 
-  console.log(currentPercentageComplete)
-
-  const writtenText = (()=>{
+  const writtenText = (() => {
     if (!props.state) {
-      return initialText
+      return initialText;
     }
     switch (props.state) {
       case 'off':
-        return ""
-      break;
+        return '';
       case 'playing':
         return initialText.slice(
           0,
           initialText.length * currentPercentageComplete,
-        );
-      break;
+      );
       case 'force_on':
-        return initialText
-      break;
+        return initialText;
+      default:
+        return initialText;
     }
-  })()
+  })();
 
   setTimeout(() => {
     setTick({});
-  }, 100);
+  }, 1);
 
-  return <>{writtenText}</>;
+  if (writtenText.length === initialText.length) {
+    if (firedFinishedLambda === false) {
+      setFiredFinishedLambda(true);
+      if (props.OnFinishAnimation !== undefined) {
+        props.OnFinishAnimation();
+      }
+    }
+  }
+
+  const renderTextWithLineBreaks = (text: string, rawText: string) => {
+    const result = [];
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === '\\' && rawText[i + 1] === 'n') {
+        result.push(<br key={i} />);
+        i++; // Skip the 'n' character
+      } else {
+        result.push(text[i]);
+      }
+    }
+
+    return result;
+  };
+
+  return <>{renderTextWithLineBreaks(writtenText, initialText)}</>;
 }
 
 export default AnimatedText;
