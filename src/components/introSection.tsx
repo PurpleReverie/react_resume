@@ -11,13 +11,16 @@ I thrive on solving problems and bringing  solutions to life.
 With a passion for interdisciplinary collaboration, 
 I'm always eager to explore new ground and tackle exciting challenges.
 */
-import React from 'react';
+import React, { useContext } from 'react';
 import Container from './Container';
 import AnimatedText from './AnimatedText';
+import { AppStateContext } from '../App';
 
 export default function IntroSection() {
+  const appContext = useContext(AppStateContext);
+
   return (
-    <div className="max-w-7xl">
+    <div className="max-w-6xl">
       <Container>
         <p>
           <AnimatedText state={'playing'}>
@@ -34,6 +37,15 @@ export default function IntroSection() {
             collaboration, I&apos;m always eager to explore new ground and
             tackle exciting challenges.
           </AnimatedText>
+          <br />
+          <br />
+          <button
+            onClick={() => {
+              appContext.setResumeState(2);
+            }}
+          >
+            Continue
+          </button>
         </p>
       </Container>
     </div>

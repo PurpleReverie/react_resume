@@ -5,6 +5,7 @@ import Background from './Background';
 import Container from './components/Container';
 import PageQuestions from './Pages/PageQuestions';
 import IntroSection from './components/introSection';
+import ResumeSection from './Pages/MainResume';
 
 export interface ResumeContext {
   questionState: number;
@@ -32,6 +33,9 @@ function App() {
       </>,
       <>
         <IntroSection />
+      </>,
+      <>
+        <ResumeSection />
       </>,
     ][questionState];
   };
