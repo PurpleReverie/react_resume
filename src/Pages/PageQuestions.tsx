@@ -5,6 +5,20 @@ import AnimatedText from '../components/AnimatedText';
 import { useTrigger } from '../hooks/useTrigger';
 import { questionButtonStyle } from '../utility/styles';
 
+// oh, hello there! Fancy meeting you here...
+
+// How did you stumble upon my little corner of the web?
+
+// Pure serendipity
+// Via LinkedIn's vast network
+// Through the grapevine
+
+// Interesting... And you are?
+
+// A savvy Recruiter/Talent Acquisition pro
+// A discerning Hiring Manager
+// A fellow Developer/Tech Enthusiast
+
 function PageQuestions() {
   const appContext = React.useContext(AppStateContext);
   const [startAnimationEvent, startAnimationHandle] = useTrigger();
@@ -26,6 +40,8 @@ function PageQuestions() {
     console.log('triggering text animation again');
     startAnimationEvent.invoke();
     setQuestionaireState(2);
+
+    appContext.setResumeState(1);
   };
 
   const renderQuestion = (questionState: number) => {
@@ -39,23 +55,26 @@ function PageQuestions() {
               setQuestionOneTextIsFinished(true);
             }}
           >
-            Oh, Hello . . . . \n how do you find me?
+            Oh, hello there! Fancy meeting you here... \n\n\n How did you
+            stumble upon my little corner of the web?
           </AnimatedText>
         </p>
         <br />
         {questionOneTextIsFinished && (
           <div>
-            {['Random Chance', 'Linked In', 'Word Of Mouth'].map(
-              (label, index) => (
-                <button
-                  key={index}
-                  className={questionButtonStyle}
-                  onClick={() => questionOneSelectOption(index)}
-                >
-                  {label}
-                </button>
-              )
-            )}
+            {[
+              'Pure serendipity',
+              'Via LinkedIn\'s vast network',
+              'Through the grapevine',
+            ].map((label, index) => (
+              <button
+                key={index}
+                className={questionButtonStyle}
+                onClick={() => questionOneSelectOption(index)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         )}
       </>,
@@ -68,16 +87,16 @@ function PageQuestions() {
               setQuestionTwoTextIsFinished(true);
             }}
           >
-            Right . . . . . \n And who are you?
+            Interesting... And you are?
           </AnimatedText>
         </p>
         <br />
         {questionTwoTextIsFinished && (
           <div>
             {[
-              'Recruiter / Talent Acquisition',
-              'Hiring Manager',
-              'Developer',
+              'A savvy Recruiter/Talent Acquisition pro',
+              'A discerning Hiring Manager',
+              'A fellow Developer/Tech Enthusiast',
             ].map((label, index) => (
               <button
                 key={index}

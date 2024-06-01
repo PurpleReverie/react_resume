@@ -25,7 +25,7 @@ function AnimatedText(props: AnimatedTextProps) {
     setFiredFinishedLambda(false);
   }, [props?.resetAnimation?.watch()]);
 
-  const rate = 0.1;
+  const rate = 0.05;
   const duration = initialText.length * rate;
 
   const currentTime = Date.now() / 1000;

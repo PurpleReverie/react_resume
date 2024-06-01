@@ -4,6 +4,7 @@ import './App.css';
 import Background from './Background';
 import Container from './components/Container';
 import PageQuestions from './Pages/PageQuestions';
+import IntroSection from './components/introSection';
 
 export interface ResumeContext {
   questionState: number;
@@ -20,14 +21,27 @@ export const AppStateContext = React.createContext<ResumeContext>({
 function App() {
   const [questionState, setQuestionState] = useState(0);
 
-  const setResumeState = (state: number) => setQuestionState;
+  const setResumeState = (state: number) => {
+    setQuestionState(state);
+  };
+
+  const renderAppState = () => {
+    return [
+      <>
+        <PageQuestions />
+      </>,
+      <>
+        <IntroSection />
+      </>,
+    ][questionState];
+  };
 
   return (
     <AppStateContext.Provider value={{ questionState, setResumeState }}>
       <div className="App">
         <Background />
         <div className="absolute w-full h-screen flex justify-center items-center">
-          {questionState === 0 ? <PageQuestions /> : <></>}
+          {renderAppState()}
         </div>
       </div>
     </AppStateContext.Provider>
