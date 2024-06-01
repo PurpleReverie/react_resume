@@ -10,13 +10,22 @@ function PageQuestions() {
   const [startAnimationEvent, startAnimationHandle] = useTrigger();
   const [questionOneTextIsFinished, setQuestionOneTextIsFinished] =
     useState(false);
+  const [questionTwoTextIsFinished, setQuestionTwoTextIsFinished] =
+    useState(false);
   const [questionaireState, setQuestionaireState] = useState(0);
-  const questionOneSelectionOption = (option: number) => {
+  const questionOneSelectOption = (option: number) => {
     // TODO: do something with the option
 
     console.log('triggering text animation again');
     startAnimationEvent.invoke();
     setQuestionaireState(1);
+  };
+  const questionTwoSelectOption = (option: number) => {
+    // TODO: do something with the option
+
+    console.log('triggering text animation again');
+    startAnimationEvent.invoke();
+    setQuestionaireState(2);
   };
 
   const renderQuestion = (questionState: number) => {
@@ -36,39 +45,50 @@ function PageQuestions() {
         <br />
         {questionOneTextIsFinished && (
           <div>
-            <button
-              className={`${questionButtonStyle}`}
-              onClick={() => {
-                questionOneSelectionOption(0);
-              }}
-            >
-              Random Chance
-            </button>
-            <button
-              className={`${questionButtonStyle}`}
-              onClick={() => {
-                questionOneSelectionOption(1);
-              }}
-            >
-              Linked In
-            </button>
-            <button
-              className={`${questionButtonStyle}`}
-              onClick={() => {
-                questionOneSelectionOption(2);
-              }}
-            >
-              Word Of Mouth
-            </button>
+            {['Random Chance', 'Linked In', 'Word Of Mouth'].map(
+              (label, index) => (
+                <button
+                  key={index}
+                  className={questionButtonStyle}
+                  onClick={() => questionOneSelectOption(index)}
+                >
+                  {label}
+                </button>
+              )
+            )}
           </div>
         )}
       </>,
       <>
         <p>
-          <AnimatedText resetAnimation={startAnimationHandle} state={'playing'}>
+          <AnimatedText
+            resetAnimation={startAnimationHandle}
+            state={'playing'}
+            OnFinishAnimation={() => {
+              setQuestionTwoTextIsFinished(true);
+            }}
+          >
             Right . . . . . \n And who are you?
           </AnimatedText>
         </p>
+        <br />
+        {questionTwoTextIsFinished && (
+          <div>
+            {[
+              'Recruiter / Talent Acquisition',
+              'Hiring Manager',
+              'Developer',
+            ].map((label, index) => (
+              <button
+                key={index}
+                className={questionButtonStyle}
+                onClick={() => questionTwoSelectOption(index)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
       </>,
     ][questionState];
   };
