@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppStateContext } from '../App';
 import Container from '../components/Container';
 import AnimatedText from '../components/AnimatedText';
@@ -20,6 +20,8 @@ import { useNavigate } from 'react-router-dom';
 // A discerning Hiring Manager
 // A fellow Developer/Tech Enthusiast
 
+const questionsKey = 'questions_awnsers';
+
 function PageQuestions() {
   const navigate = useNavigate();
   const [startAnimationEvent, startAnimationHandle] = useTrigger();
@@ -33,6 +35,13 @@ function PageQuestions() {
 
     console.log('triggering text animation again');
     startAnimationEvent.invoke();
+
+    const currentSelectedOptions = JSON.parse(
+      localStorage.getItem(questionsKey) as string | '{}'
+    ) as any;
+    currentSelectedOptions.option1 = option;
+    localStorage.setItem(questionsKey, JSON.stringify(currentSelectedOptions));
+
     setQuestionaireState(1);
   };
   const questionTwoSelectOption = (option: number) => {
@@ -40,10 +49,24 @@ function PageQuestions() {
 
     console.log('triggering text animation again');
     startAnimationEvent.invoke();
+
+    const currentSelectedOptions = JSON.parse(
+      localStorage.getItem(questionsKey) as string | '{}'
+    ) as any;
+    currentSelectedOptions.option2 = option;
+
+    localStorage.setItem(questionsKey, JSON.stringify(currentSelectedOptions));
+    localStorage.setItem('questions_state', 'true');
+
     setQuestionaireState(2);
 
     navigate('/intro');
   };
+
+  useEffect(() => {
+    localStorage.setItem('questions_state', 'false');
+    localStorage.setItem('questions_awnsers', JSON.stringify({}));
+  }, []);
 
   const renderQuestion = (questionState: number) => {
     return [

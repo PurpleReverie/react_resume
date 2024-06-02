@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
+import { useNavigate } from 'react-router-dom';
 
 /*
   first section
@@ -15,6 +16,24 @@ import Container from '../components/Container';
 const firstSectionColumnStyle = 'flex-1';
 
 export default function ResumeSection() {
+  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    const questionState = localStorage.getItem('questions_state');
+    console.log(questionState);
+    if (questionState === null || questionState === 'false') {
+      console.log('questions');
+      navigate('/questions');
+    } else {
+      setIsChecked(true);
+    }
+  }, [navigate]);
+
+  if (!isChecked) {
+    return null; // or a loading spinner if you prefer
+  }
+
   return (
     <div className="w-full max-w-7xl">
       <section>
