@@ -15,9 +15,10 @@ import React, { useContext } from 'react';
 import Container from './Container';
 import AnimatedText from './AnimatedText';
 import { AppStateContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 export default function IntroSection() {
-  const appContext = useContext(AppStateContext);
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-6xl">
@@ -41,7 +42,7 @@ export default function IntroSection() {
           <br />
           <button
             onClick={() => {
-              appContext.setResumeState(2);
+              navigate('/');
             }}
           >
             Continue

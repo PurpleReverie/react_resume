@@ -4,6 +4,7 @@ import Container from '../components/Container';
 import AnimatedText from '../components/AnimatedText';
 import { useTrigger } from '../hooks/useTrigger';
 import { questionButtonStyle } from '../utility/styles';
+import { useNavigate } from 'react-router-dom';
 
 // oh, hello there! Fancy meeting you here...
 
@@ -20,7 +21,7 @@ import { questionButtonStyle } from '../utility/styles';
 // A fellow Developer/Tech Enthusiast
 
 function PageQuestions() {
-  const appContext = React.useContext(AppStateContext);
+  const navigate = useNavigate();
   const [startAnimationEvent, startAnimationHandle] = useTrigger();
   const [questionOneTextIsFinished, setQuestionOneTextIsFinished] =
     useState(false);
@@ -41,7 +42,7 @@ function PageQuestions() {
     startAnimationEvent.invoke();
     setQuestionaireState(2);
 
-    appContext.setResumeState(1);
+    navigate('/intro');
   };
 
   const renderQuestion = (questionState: number) => {
