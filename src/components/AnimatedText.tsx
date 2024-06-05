@@ -3,11 +3,8 @@ import { UseTriggerWatch } from '../hooks/useTrigger';
 
 export interface AnimatedTextProps {
   state?: 'off' | 'playing' | 'force_on';
-
   resetAnimation?: UseTriggerWatch;
-
   OnFinishAnimation?: () => void;
-
   children: string;
 }
 
@@ -32,33 +29,60 @@ function AnimatedText(props: AnimatedTextProps) {
 
   const currentPercentageComplete = Math.min(
     (currentTime - start) / duration,
-    1,
+    1
   );
 
-  const writtenText = (() => {
-    if (!props.state) {
-      return initialText;
+  const renderTextWithLineBreaks = (text: string) => {
+    const parts = text.split('\\n').map((p) => p.replace(/\\/g, ''));
+    return (
+      <>
+        {parts.map((p, index) => (
+          <React.Fragment key={index}>
+            {p}
+            {index !== parts.length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
+
+  const renderTextProgress = (text: string) => {
+    const progressLength = Math.floor(
+      initialText.length * currentPercentageComplete,
+    );
+
+    // Find the closest \n before and after the split point
+    let splitIndex = progressLength;
+    while (
+      (initialText[splitIndex] === '\\' &&
+        initialText[splitIndex + 1] === 'n') ||
+      (initialText[splitIndex] === 'n' && initialText[splitIndex - 1] === '\\')
+    ) {
+      splitIndex -= 1;
     }
-    switch (props.state) {
-      case 'off':
-        return '';
-      case 'playing':
-        return initialText.slice(
-          0,
-          initialText.length * currentPercentageComplete,
-      );
-      case 'force_on':
-        return initialText;
-      default:
-        return initialText;
-    }
-  })();
+
+    const firstPart = initialText.slice(0, splitIndex);
+    const secondPart = initialText.slice(splitIndex);
+
+    return (
+      <>
+        <span>{renderTextWithLineBreaks(firstPart)}</span>
+        <span className="invisible">
+          {renderTextWithLineBreaks(secondPart)}
+        </span>
+      </>
+    );
+  };
 
   setTimeout(() => {
     setTick({});
   }, 1);
 
-  if (writtenText.length === initialText.length) {
+  const progressLength = Math.floor(
+    initialText.length * currentPercentageComplete,
+  );
+
+  if (progressLength === initialText.length) {
     if (firedFinishedLambda === false) {
       setFiredFinishedLambda(true);
 
@@ -70,21 +94,7 @@ function AnimatedText(props: AnimatedTextProps) {
     }
   }
 
-  const renderTextWithLineBreaks = (text: string, rawText: string) => {
-    const result = [];
-    for (let i = 0; i < text.length; i++) {
-      if (text[i] === '\\' && rawText[i + 1] === 'n') {
-        result.push(<br key={i} />);
-        i++; // Skip the 'n' character
-      } else {
-        result.push(text[i]);
-      }
-    }
-
-    return result;
-  };
-
-  return <>{renderTextWithLineBreaks(writtenText, initialText)}</>;
+  return <>{renderTextProgress(initialText)}</>;
 }
 
 export default AnimatedText;

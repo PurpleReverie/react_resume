@@ -28,20 +28,6 @@ function App() {
     setQuestionState(state);
   };
 
-  // const renderAppState = () => {
-  //   return [
-  //     <>
-  //       <PageQuestions />
-  //     </>,
-  //     <>
-  //       <IntroSection />
-  //     </>,
-  //     <>
-  //       <ResumeSection />
-  //     </>,
-  //   ][questionState];
-  // };
-
   return (
     <AppStateContext.Provider value={{ setResumeState }}>
       <div className="App">
