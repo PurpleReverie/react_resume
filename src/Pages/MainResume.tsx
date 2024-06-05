@@ -40,7 +40,7 @@ export default function ResumeSection() {
         <div className="flex flex-row justify-center">
           <div className={firstSectionColumnStyle}>
             <Container expand={true}>
-              <p>Profile Photo</p>
+              <img src={'/profilePic.webp'} />
             </Container>
           </div>
           <div className={firstSectionColumnStyle}>
