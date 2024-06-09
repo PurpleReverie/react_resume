@@ -36,7 +36,7 @@ export default function ResumeSection() {
   }
 
   return (
-    <div className="w-full max-w-7xl">
+    <div className="w-full max-w-7xl p-6">
       <section>
         <div className="flex flex-row justify-center">
           <div className={firstSectionColumnStyle}>

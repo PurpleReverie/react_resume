@@ -13,7 +13,7 @@ export interface BlogPostProps {
 
 export function BlogPostEntry(props: BlogPostProps) {
   return (
-    <Container expand={true}>
+    <Container expand={true} className="m-[8px] rounded-md">
       <p>{props.post.title}</p>
       <br />
       <p>{props.post.post}</p>
@@ -32,9 +32,18 @@ export interface BlogContainerProps {
 export function BlogContainer(props: BlogContainerProps) {
   return (
     <>
-      {props.posts.map((p, i) => (
-        <BlogPostEntry key={i} post={p} />
-      ))}
+      <div className={'bg-[#000000] bg-opacity-10 pb-[12px] rounded-lg'}>
+        <Container className={'mb-[8px]'} expand={true}>
+          <h1>My Blog . . . .</h1>
+        </Container>
+        <div className={'px-16'}>
+          {props.posts.slice(0, 3).map((p, i) => (
+            <BlogPostEntry key={i} post={p} />
+          ))}
+        </div>
+        <div className="h-4" />
+        <button className="text-white">Show more . . .</button>
+      </div>
     </>
   );
 }
