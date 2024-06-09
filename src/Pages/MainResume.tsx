@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { useNavigate } from 'react-router-dom';
-import { BlogResumeContainer, mockBlogPosts } from '../components/Blog';
-import { ResumeSkillsContainer } from '../components/Skills';
+import { BlogResumeContainer, mockBlogPosts } from '../components/resume/Blog';
+import { ResumeSkillsContainer } from '../components/resume/Skills';
+import {
+  WorkExperienceResumeContainer,
+  mockWorkExperience as mockWorkExperiences,
+} from '../components/resume/WorkExperince';
 
 /*
   first section
@@ -62,7 +66,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <Container expand={true}>Work Experience</Container>
+        <WorkExperienceResumeContainer entrys={mockWorkExperiences} />
       </section>
       <hr className={hrStyle} />
       <section>

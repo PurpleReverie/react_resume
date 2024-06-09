@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from './Container';
+import Container from '../Container';
 
 export interface BlogPostData {
   title: string;
@@ -38,7 +38,7 @@ export interface BlogContainerProps {
 export function BlogResumeContainer(props: BlogContainerProps) {
   return (
     <>
-      <div className={'my-4 bg-[#000000] bg-opacity-10 pb-[12px] rounded-lg'}>
+      <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
         <Container className={'mb-[8px]'} expand={true}>
           <h1>My Blog . . . .</h1>
         </Container>

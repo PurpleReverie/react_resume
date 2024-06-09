@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from './Container';
+import Container from '../Container';
 
 // TODO: create entries for skills, describing each of your skills and how you used it in the past
 
