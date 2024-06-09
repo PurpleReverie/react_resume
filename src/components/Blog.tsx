@@ -13,7 +13,13 @@ export interface BlogPostProps {
 
 export function BlogPostEntry(props: BlogPostProps) {
   return (
-    <Container expand={true} className="m-[8px] rounded-md">
+    <Container
+      onClick={() => {
+        console.log('Go to post!');
+      }}
+      expand={true}
+      className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300"
+    >
       <p>{props.post.title}</p>
       <br />
       <p>{props.post.post}</p>

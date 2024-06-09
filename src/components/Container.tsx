@@ -1,12 +1,19 @@
 import React from 'react';
 
-export interface ContainerProps {
-  children?: React.ReactNode;
-  expand?: boolean;
-  className?: string;
-}
+export type ContainerProps =
+  | {
+      children?: React.ReactNode;
+      expand?: boolean;
+      className?: string;
+    }
+  | any;
 
 function Container(props: ContainerProps) {
+  const remainingProps = { ...props };
+  delete remainingProps.children;
+  delete remainingProps.expand;
+  delete remainingProps.className;
+
   return (
     <div
       className={`${props.className !== undefined ? props.className : ''} bg-white m-[20px] p-[20px] rounded-lg inline-block outline outline-[2px] outline-[#ababab] ${
@@ -15,9 +22,10 @@ function Container(props: ContainerProps) {
           : ''
       }`}
       id="container"
-      style={{
-        boxSizing: 'border-box',
-      }}
+      // style={{
+      //   boxSizing: 'border-box',
+      // }}
+      {...remainingProps}
     >
       {props.children}
     </div>
