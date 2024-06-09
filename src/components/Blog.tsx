@@ -38,7 +38,7 @@ export interface BlogContainerProps {
 export function BlogContainer(props: BlogContainerProps) {
   return (
     <>
-      <div className={'bg-[#000000] bg-opacity-10 pb-[12px] rounded-lg'}>
+      <div className={'my-4 bg-[#000000] bg-opacity-10 pb-[12px] rounded-lg'}>
         <Container className={'mb-[8px]'} expand={true}>
           <h1>My Blog . . . .</h1>
         </Container>

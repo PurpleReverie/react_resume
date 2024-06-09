@@ -15,6 +15,7 @@ import { BlogContainer, mockBlogPosts } from '../components/Blog';
 */
 
 const firstSectionColumnStyle = 'flex-1';
+const hrStyle = 'w-48 mx-auto';
 
 export default function ResumeSection() {
   const navigate = useNavigate();
@@ -58,12 +59,15 @@ export default function ResumeSection() {
           </div>
         </div>
       </section>
+      <hr className={hrStyle} />
       <section>
         <Container expand={true}>Work Experience</Container>
       </section>
+      <hr className={hrStyle} />
       <section>
         <Container expand={true}>Skills</Container>
       </section>
+      <hr className={hrStyle} />
       <section>
         {/* <Container expand={true}>Blog</Container> */}
         <BlogContainer posts={mockBlogPosts} />
