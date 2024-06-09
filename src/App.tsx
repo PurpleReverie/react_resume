@@ -29,20 +29,22 @@ function App() {
   };
 
   return (
-    <AppStateContext.Provider value={{ setResumeState }}>
-      <div className="App">
-        <Background />
-        <div className="absolute w-full flex justify-center items-center">
-          <Routes>
-            <Route path="/">
-              <Route index element={<ResumeSection />} />
-              <Route path="intro" element={<IntroSection />} />
-              <Route path="questions" element={<PageQuestions />} />
-            </Route>
-          </Routes>
+    <>
+      <AppStateContext.Provider value={{ setResumeState }}>
+        <div className="App">
+          <Background />
+          <div className="absolute w-full flex justify-center items-center">
+            <Routes>
+              <Route path="/">
+                <Route index element={<ResumeSection />} />
+                <Route path="intro" element={<IntroSection />} />
+                <Route path="questions" element={<PageQuestions />} />
+              </Route>
+            </Routes>
+          </div>
         </div>
-      </div>
-    </AppStateContext.Provider>
+      </AppStateContext.Provider>
+    </>
   );
 }
 

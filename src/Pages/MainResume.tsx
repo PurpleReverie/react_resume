@@ -44,6 +44,25 @@ export default function ResumeSection() {
   return (
     <div className="w-full max-w-7xl p-6">
       <section>
+        <Container expand={true}>
+          <h1>Taura J Greig</h1>
+          <p>Full Stack Software Engineer</p>
+          <p>+64211049888</p>
+          <p className="text-blue-500">
+            <a href="mailto:taurajgreig@outlook.com">taurajgreig@outlook.com</a>
+          </p>
+          <p>Auckland, New Zealand</p>
+        </Container>
+        <Container>
+          <p>
+            This Resume Portfolio site is a <b>WORK IN PROGRESS</b>, and the
+            content on this site is fictitious while it is being built. That
+            said, I AM a full stack software engineer, and if you want to grab a
+            copy of my resume, please email me using the email address above
+          </p>
+        </Container>
+      </section>
+      <section>
         <div className="flex flex-row justify-center">
           <div className={firstSectionColumnStyle}>
             <Container expand={true}>
