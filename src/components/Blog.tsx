@@ -47,8 +47,10 @@ export function BlogContainer(props: BlogContainerProps) {
             <BlogPostEntry key={i} post={p} />
           ))}
         </div>
-        <div className="h-4" />
-        <button className="text-white">Show more . . .</button>
+        <div className="h-2" />
+        <button className="text-white outline p-1 px-2 rounded-sm bg-white bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40">
+          Show more . . .
+        </button>
       </div>
     </>
   );
