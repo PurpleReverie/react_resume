@@ -35,7 +35,7 @@ export interface BlogContainerProps {
   posts: BlogPostData[];
 }
 
-export function BlogContainer(props: BlogContainerProps) {
+export function BlogResumeContainer(props: BlogContainerProps) {
   return (
     <>
       <div className={'my-4 bg-[#000000] bg-opacity-10 pb-[12px] rounded-lg'}>

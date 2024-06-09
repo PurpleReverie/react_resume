@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { useNavigate } from 'react-router-dom';
-import { BlogContainer, mockBlogPosts } from '../components/Blog';
+import { BlogResumeContainer, mockBlogPosts } from '../components/Blog';
+import { ResumeSkillsContainer } from '../components/Skills';
 
 /*
   first section
@@ -65,12 +66,12 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <Container expand={true}>Skills</Container>
+        <ResumeSkillsContainer />
       </section>
       <hr className={hrStyle} />
       <section>
         {/* <Container expand={true}>Blog</Container> */}
-        <BlogContainer posts={mockBlogPosts} />
+        <BlogResumeContainer posts={mockBlogPosts} />
       </section>
     </div>
   );
