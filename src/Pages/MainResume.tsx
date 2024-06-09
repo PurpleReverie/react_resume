@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { useNavigate } from 'react-router-dom';
+import { BlogContainer, mockBlogPosts } from '../components/Blog';
 
 /*
   first section
@@ -64,7 +65,8 @@ export default function ResumeSection() {
         <Container expand={true}>Skills</Container>
       </section>
       <section>
-        <Container expand={true}>Blog</Container>
+        {/* <Container expand={true}>Blog</Container> */}
+        <BlogContainer posts={mockBlogPosts} />
       </section>
     </div>
   );

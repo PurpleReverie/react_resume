@@ -32,7 +32,7 @@ function App() {
     <AppStateContext.Provider value={{ setResumeState }}>
       <div className="App">
         <Background />
-        <div className="absolute w-full h-screen flex justify-center items-center">
+        <div className="absolute w-full flex justify-center items-center">
           <Routes>
             <Route path="/">
               <Route index element={<ResumeSection />} />
