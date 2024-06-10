@@ -22,7 +22,6 @@ if [ -d build ]; then
 fi
 
 echo Pulling Github Pages repo into build
-ls ./build
 
 # Clone the GitHub Pages repository
 git clone $GITHUB_PAGES_REPO build
