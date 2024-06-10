@@ -9,8 +9,7 @@ fi
 export NVM_DIR=$HOME/.nvm;
 source $NVM_DIR/nvm.sh;
 
-
-echo Deploying to github pages
+echo Deploying to GitHub Pages
 
 # Check if the build directory exists
 if [ -d build ]; then
@@ -21,10 +20,21 @@ if [ -d build ]; then
   fi
 fi
 
-echo Pulling Github Pages repo into build
+echo Pulling GitHub Pages repo into build
+
+# Ensure temp directory exists
+TEMP_DIR=~/.temp/websiteBuildRepo
+if [ -d $TEMP_DIR ]; then
+  rm -rf $TEMP_DIR
+  if [ $? -ne 0 ]; then
+    echo "Failed to remove old temporary repository!"
+    exit 1
+  fi
+fi
+mkdir -p $TEMP_DIR
 
 # Clone the GitHub Pages repository
-git clone $GITHUB_PAGES_REPO build
+git clone $GITHUB_PAGES_REPO $TEMP_DIR
 if [ $? -ne 0 ]; then
   echo "Failed to clone the GitHub Pages repository!"
   exit 1
@@ -47,7 +57,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-cd ./build
+# Copy build files to the temp repository, forcefully overriding existing files
+cp -r ./build/. $TEMP_DIR/
+
+cd $TEMP_DIR
 
 # Configure Git user
 git config user.name "$USERNAME"
@@ -69,3 +82,12 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Deployment to GitHub Pages completed successfully!"
+
+# Clean up
+if [ -d $TEMP_DIR ]; then
+  rm -rf $TEMP_DIR
+  if [ $? -ne 0 ]; then
+    echo "Failed to remove temporary repository!"
+    exit 1
+  fi
+fi
