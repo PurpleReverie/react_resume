@@ -18,7 +18,7 @@ export function BlogPostEntry(props: BlogPostProps) {
         console.log('Go to post!');
       }}
       expand={true}
-      className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300"
+      className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300 cursor-pointer"
     >
       <p>{props.post.title}</p>
       <br />

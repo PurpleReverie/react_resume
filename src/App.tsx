@@ -28,9 +28,6 @@ function App() {
     setQuestionState(state);
   };
 
-  console.log('Hello world');
-  console.log('Hello world 2');
-
   return (
     <>
       <AppStateContext.Provider value={{ setResumeState }}>

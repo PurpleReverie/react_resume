@@ -7,6 +7,10 @@ import {
   WorkExperienceResumeContainer,
   mockWorkExperience as mockWorkExperiences,
 } from '../components/resume/WorkExperince';
+import {
+  ProjectMainResumeContainer,
+  mockProjectEntries,
+} from '../components/resume/Projects';
 
 /*
   first section
@@ -16,7 +20,6 @@ import {
     places I have worked, contributions 
   skills
   blog
-
 */
 
 const firstSectionColumnStyle = 'flex-1';
@@ -95,6 +98,10 @@ export default function ResumeSection() {
       <section>
         {/* <Container expand={true}>Blog</Container> */}
         <BlogResumeContainer posts={mockBlogPosts} />
+      </section>
+      <hr className={hrStyle} />
+      <section>
+        <ProjectMainResumeContainer entrys={mockProjectEntries} />
       </section>
     </div>
   );
