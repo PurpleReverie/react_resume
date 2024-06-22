@@ -5,6 +5,7 @@ import { BlogResumeContainer, mockBlogPosts } from '../components/resume/Blog';
 import {
   ResumeSkillPopupContainer,
   ResumeSkillsContainer,
+  testSkills,
 } from '../components/resume/Skills';
 import {
   WorkExperienceResumeContainer,
@@ -32,7 +33,8 @@ const hrStyle = 'w-48 mx-auto';
 export default function ResumeSection() {
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
-  const { showSkill, skill } = useURLParams();
+  const { skill } = useURLParams();
+  const showSkill = skill !== undefined;
 
   useEffect(() => {
     const questionState = localStorage.getItem('questions_state');
@@ -51,8 +53,9 @@ export default function ResumeSection() {
 
   return (
     <div className="w-full max-w-7xl p-6">
-      <ResumeSkillPopupContainer />
-
+      {showSkill === true && (
+        <ResumeSkillPopupContainer skill={testSkills[0]} />
+      )}
       <section>
         <Container expand={true}>
           <h1>Taura J Greig</h1>
@@ -103,7 +106,6 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        {/* <Container expand={true}>Blog</Container> */}
         <BlogResumeContainer posts={mockBlogPosts} />
       </section>
       <hr className={hrStyle} />

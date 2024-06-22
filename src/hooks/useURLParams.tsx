@@ -6,6 +6,8 @@ export default function useURLParams() {
   >();
 
   useEffect(() => {
+    console.log('window.location.search changed');
+    console.log('window.location.search');
     const urlParams = new URLSearchParams(window.location.search);
     const returnObject: { [key: string]: unknown } = {};
     for (const [key, value] of urlParams.entries()) {
