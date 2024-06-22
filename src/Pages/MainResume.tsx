@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { useNavigate } from 'react-router-dom';
 import { BlogResumeContainer, mockBlogPosts } from '../components/resume/Blog';
-import { ResumeSkillsContainer } from '../components/resume/Skills';
+import {
+  ResumeSkillPopupContainer,
+  ResumeSkillsContainer,
+} from '../components/resume/Skills';
 import {
   WorkExperienceResumeContainer,
   mockWorkExperience as mockWorkExperiences,
@@ -11,6 +14,7 @@ import {
   ProjectMainResumeContainer,
   mockProjectEntries,
 } from '../components/resume/Projects';
+import useURLParams from '../hooks/useURLParams';
 
 /*
   first section
@@ -28,6 +32,7 @@ const hrStyle = 'w-48 mx-auto';
 export default function ResumeSection() {
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
+  const { showSkill, skill } = useURLParams();
 
   useEffect(() => {
     const questionState = localStorage.getItem('questions_state');
@@ -46,6 +51,8 @@ export default function ResumeSection() {
 
   return (
     <div className="w-full max-w-7xl p-6">
+      <ResumeSkillPopupContainer />
+
       <section>
         <Container expand={true}>
           <h1>Taura J Greig</h1>

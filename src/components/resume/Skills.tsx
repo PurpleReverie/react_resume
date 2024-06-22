@@ -26,6 +26,11 @@ const testSkills = [
   'typescript',
 ];
 
+export interface SkillEntry {
+  skill: string;
+  body: string;
+}
+
 const skillBlockStyle =
   'outline outline-gray-200 m-1 p-1 px-4 rounded-lg cursor-pointer hover:bg-gray-200 active:bg-gray-300';
 
@@ -51,5 +56,32 @@ export function ResumeSkillsContainer() {
         </div>
       </Container>
     </>
+  );
+}
+
+/*
+    <div className="fixed inset-0 z-[-1]">
+      <div className="w-full h-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500"></div>
+    </div>
+*/
+
+export function ResumeSkillPopupContainer() {
+  return (
+    <div className="fixed inset-0 z-[1]">
+      <div className="fixed w-full h-full bg-gray-800 opacity-70"></div>
+      <div
+        className="fixed w-full h-full flex justify-center items-center cursor-pointer"
+        onClick={() => {
+          console.log('Click');
+        }}
+      >
+        <Container
+          className="min-w-[300px] min-h-[200px] cursor-default"
+          onClick={(e: unknown) => (e as Event).stopPropagation()}
+        >
+          <button>Close</button>
+        </Container>
+      </div>
+    </div>
   );
 }
