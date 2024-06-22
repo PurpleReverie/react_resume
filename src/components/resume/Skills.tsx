@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 // TODO: create entries for skills, describing each of your skills and how you used it in the past
 
 export interface SkillEntry {
-  skill: string;
+  skillId: string;
+  skillName: string;
   body: string;
 }
 
@@ -28,14 +29,14 @@ export function ResumeSkillsContainer() {
                 const currentParams = new URLSearchParams(
                   window.location.search,
                 );
-                currentParams.set('skill', s.skill);
+                currentParams.set('skill', s.skillId);
                 navigate(
                   `${window.location.pathname}?${currentParams.toString()}`,
                 );
               }}
             >
               {' '}
-              {s.skill}{' '}
+              {s.skillName}{' '}
             </span>
           ))}
         </div>
@@ -51,14 +52,18 @@ export function ResumeSkillsContainer() {
 */
 
 export interface ResumeSkillPopupContainerProps {
-  skill: SkillEntry;
-  userLeave?: () => void;
+  skill?: SkillEntry;
 }
 
 export function ResumeSkillPopupContainer(
   props: ResumeSkillPopupContainerProps,
 ) {
   const navigate = useNavigate();
+  if (props.skill === undefined) {
+    console.log(props.skill);
+    console.log('aborting');
+    return <></>;
+  }
 
   const closeSkillPopup = () => {
     console.log('Delete skill');
@@ -81,7 +86,7 @@ export function ResumeSkillPopupContainer(
           className="min-w-[300px] min-h-[200px] cursor-default"
           onClick={(e: unknown) => (e as Event).stopPropagation()}
         >
-          <p>{props.skill.skill}</p>
+          <p>{props.skill.skillName}</p>
           <p>{props.skill.body}</p>
         </Container>
       </div>
@@ -91,43 +96,53 @@ export function ResumeSkillPopupContainer(
 
 export const testSkills: SkillEntry[] = [
   {
-    skill: 'JavaScript',
+    skillName: 'JavaScript',
+    skillId: 'javascript',
     body: 'Proficient in JavaScript, including ES6+ features. Experience with frameworks such as React, Angular, and Vue.js.',
   },
   {
-    skill: 'Python',
+    skillName: 'Python',
+    skillId: 'python',
     body: 'Skilled in Python for data analysis, web development, and scripting. Familiar with libraries like NumPy, pandas, and Django.',
   },
   {
-    skill: 'HTML & CSS',
+    skillName: 'HTML & CSS',
+    skillId: 'HTMLCSS',
     body: 'Experienced in creating responsive and accessible web pages using HTML5 and CSS3. Knowledge of CSS preprocessors like SASS and LESS.',
   },
   {
-    skill: 'Java',
+    skillName: 'Java',
+    skillId: 'java',
     body: 'Proficient in Java programming for building scalable backend systems. Experience with Spring and Hibernate frameworks.',
   },
   {
-    skill: 'SQL',
+    skillName: 'SQL',
+    skillId: 'SQL',
     body: 'Adept at writing complex SQL queries for data retrieval and manipulation. Experience with databases like MySQL, PostgreSQL, and Oracle.',
   },
   {
-    skill: 'DevOps',
+    skillName: 'DevOps',
+    skillId: 'devops',
     body: 'Knowledgeable in DevOps practices including CI/CD, containerization (Docker), and orchestration (Kubernetes). Experience with tools like Jenkins, Git, and Ansible.',
   },
   {
-    skill: 'Machine Learning',
+    skillName: 'Machine Learning',
+    skillId: 'machinelearning',
     body: 'Familiar with machine learning concepts and algorithms. Experience using TensorFlow, Keras, and scikit-learn for building and deploying models.',
   },
   {
-    skill: 'Git',
+    skillName: 'Git',
+    skillId: 'git',
     body: 'Proficient in using Git for version control. Experience with branching, merging, and resolving conflicts in collaborative environments.',
   },
   {
-    skill: 'C++',
+    skillName: 'C++',
+    skillId: 'cplusplus',
     body: 'Experienced in C++ for system programming and game development. Knowledge of standard libraries and design patterns.',
   },
   {
-    skill: 'Project Management',
+    skillName: 'Project Management',
+    skillId: 'projectmanagement',
     body: 'Skilled in project management methodologies like Agile and Scrum. Experience in leading teams and managing project timelines and deliverables.',
   },
 ];

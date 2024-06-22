@@ -54,7 +54,9 @@ export default function ResumeSection() {
   return (
     <div className="w-full max-w-7xl p-6">
       {showSkill === true && (
-        <ResumeSkillPopupContainer skill={testSkills[0]} />
+        <ResumeSkillPopupContainer
+          skill={testSkills.find((s) => s.skillId === skill)}
+        />
       )}
       <section>
         <Container expand={true}>
