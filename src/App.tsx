@@ -9,6 +9,7 @@ import ResumeSection from './Pages/MainResume';
 
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useEvent } from './hooks/useEvent';
 
 export interface ResumeContext {
   setResumeState: (state: string) => void;

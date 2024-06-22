@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '../Container';
+import { useNavigate } from 'react-router-dom';
 
 // TODO: create entries for skills, describing each of your skills and how you used it in the past
 
@@ -12,6 +13,7 @@ const skillBlockStyle =
   'outline outline-gray-200 m-1 p-1 px-4 rounded-lg cursor-pointer hover:bg-gray-200 active:bg-gray-300';
 
 export function ResumeSkillsContainer() {
+  const navigate = useNavigate();
   return (
     <>
       <Container expand={true}>
@@ -23,7 +25,13 @@ export function ResumeSkillsContainer() {
               key={i}
               className={skillBlockStyle}
               onClick={() => {
-                console.log('Clicked skill');
+                const currentParams = new URLSearchParams(
+                  window.location.search,
+                );
+                currentParams.set('skill', s.skill);
+                navigate(
+                  `${window.location.pathname}?${currentParams.toString()}`,
+                );
               }}
             >
               {' '}
@@ -43,19 +51,21 @@ export function ResumeSkillsContainer() {
 */
 
 export interface ResumeSkillPopupContainerProps {
-  skill?: SkillEntry;
+  skill: SkillEntry;
   userLeave?: () => void;
 }
 
 export function ResumeSkillPopupContainer(
   props: ResumeSkillPopupContainerProps,
 ) {
+  const navigate = useNavigate();
+
   const closeSkillPopup = () => {
     console.log('Delete skill');
     const params = new URLSearchParams(window.location.search);
     params.delete('skill');
     const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.pushState({}, '', newUrl);
+    navigate(newUrl);
   };
 
   return (
@@ -64,16 +74,16 @@ export function ResumeSkillPopupContainer(
       <div
         className="fixed w-full h-full flex justify-center items-center cursor-pointer"
         onClick={() => {
-          // if (props.userLeave !== undefined) {
-          //   props.userLeave();
-          // }
           closeSkillPopup();
         }}
       >
         <Container
           className="min-w-[300px] min-h-[200px] cursor-default"
           onClick={(e: unknown) => (e as Event).stopPropagation()}
-        ></Container>
+        >
+          <p>{props.skill.skill}</p>
+          <p>{props.skill.body}</p>
+        </Container>
       </div>
     </div>
   );
