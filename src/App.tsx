@@ -8,8 +8,15 @@ import IntroSection from './components/introSection';
 import ResumeSection from './Pages/MainResume';
 
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { useEvent } from './hooks/useEvent';
+import { BlogPage } from './Pages/BlogPage';
 
 export interface ResumeContext {
   setResumeState: (state: string) => void;
@@ -23,6 +30,7 @@ export const AppStateContext = React.createContext<ResumeContext>({
 
 function App() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [questionState, setQuestionState] = useState('');
 
   const setResumeState = (state: string) => {
@@ -38,6 +46,8 @@ function App() {
             <Routes>
               <Route path="/">
                 <Route index element={<ResumeSection />} />
+                <Route path="blog" element={<BlogPage />} />
+                <Route path="blog/:id" element={<BlogPage />} />
                 <Route path="intro" element={<IntroSection />} />
                 <Route path="questions" element={<PageQuestions />} />
               </Route>
