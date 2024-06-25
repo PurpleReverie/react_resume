@@ -35,8 +35,7 @@ export function ResumeSkillsContainer() {
                 );
               }}
             >
-              {' '}
-              {s.skillName}{' '}
+              {s.skillName}
             </span>
           ))}
         </div>
@@ -83,11 +82,19 @@ export function ResumeSkillPopupContainer(
         }}
       >
         <Container
-          className="min-w-[300px] min-h-[200px] cursor-default"
+          className="cursor-default px-16 py-4"
           onClick={(e: unknown) => (e as Event).stopPropagation()}
         >
           <p>{props.skill.skillName}</p>
           <p>{props.skill.body}</p>
+          <br />
+          <button
+            onClick={() => {
+              closeSkillPopup();
+            }}
+          >
+            Close
+          </button>
         </Container>
       </div>
     </div>

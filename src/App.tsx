@@ -18,6 +18,7 @@ import {
 import { useEvent } from './hooks/useEvent';
 import { BlogPage } from './Pages/BlogPage';
 import ScrollToTop from './components/ScrollToTop';
+import { ProjectsPage } from './Pages/ProjectsPage';
 
 export interface ResumeContext {
   setResumeState: (state: string) => void;
@@ -48,6 +49,8 @@ function App() {
                 <Route index element={<ResumeSection />} />
                 <Route path="blog" element={<BlogPage />} />
                 <Route path="blog/:id" element={<BlogPage />} />
+                <Route path="project/" element={<ProjectsPage />} />
+                <Route path="project/:id" element={<ProjectsPage />} />
                 <Route path="intro" element={<IntroSection />} />
                 <Route path="questions" element={<PageQuestions />} />
               </Route>
