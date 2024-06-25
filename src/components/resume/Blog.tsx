@@ -74,6 +74,7 @@ export function BlogPost(props: BlogPostProps) {
         <Container expand={false} className="grow flex flex-col justify-center">
           <p>{props.post.title}</p>
           <p>{formatDate(new Date(props.post.date))}</p>
+          <p>{props.post.blurb}</p>
         </Container>
         <div className="">
           <Container>
@@ -86,10 +87,11 @@ export function BlogPost(props: BlogPostProps) {
       </div>
       <hr className="w-48 mx-auto" />
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
-        <Container expand={true}>
-          <p>{props.post.blurb}</p>
-          <p>{props.post.post}</p>
-        </Container>
+        <div className={'px-16'}>
+          <Container expand={true}>
+            <p>{props.post.post}</p>
+          </Container>
+        </div>
       </div>
     </>
   );
@@ -128,12 +130,37 @@ export function BlogResumeContainer(props: BlogContainerProps) {
 }
 
 export function BlogContainer(props: BlogContainerProps) {
+  const navigate = useNavigate();
+
   return (
     <>
-      <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
-        <Container className={'mb-[8px]'} expand={true}>
+      <div className="flex flex-row justify-end">
+        <div className="flex flex-col justify-center">
+          <Container expand={false} className="flex justify-center">
+            <button
+              className="w-40 h-40 min-w-48 min-h-48"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              Back to Home
+            </button>
+          </Container>
+        </div>
+        <Container expand={false} className="grow flex flex-col justify-center">
           <h1>My Blog . . . .</h1>
         </Container>
+        <div className="">
+          <Container>
+            <img
+              src={'/profilePic.webp'}
+              className="w-40 h-40 min-w-48 min-h-48"
+            />
+          </Container>
+        </div>
+      </div>
+
+      <div className={'my-4 bg-[#000000] bg-opacity-20 py-[12px] rounded-lg'}>
         <div className={'px-16'}>
           {props.posts.map((p, i) => (
             <BlogPostEntry key={i} post={p} />
