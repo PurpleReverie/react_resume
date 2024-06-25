@@ -1,6 +1,19 @@
 import React from 'react';
 import Container from '../Container';
 import { formatDate } from '../../utility/date';
+import { useNavigate } from 'react-router-dom';
+import { LoremIpsum } from 'lorem-ipsum';
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4,
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4,
+  },
+});
 
 export interface BlogPostData {
   id_url: string;
@@ -15,13 +28,15 @@ export interface BlogPostProps {
 }
 
 export function BlogPostEntry(props: BlogPostProps) {
+  const navigation = useNavigate();
+
   if (props.post === undefined) {
     return <></>;
   }
   return (
     <Container
       onClick={() => {
-        console.log('Go to post!');
+        navigation(`/blog/${props.post?.id_url}`);
       }}
       expand={true}
       className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300 cursor-pointer"
@@ -35,17 +50,48 @@ export function BlogPostEntry(props: BlogPostProps) {
 }
 
 export function BlogPost(props: BlogPostProps) {
+  const navigate = useNavigate();
+
   if (props.post === undefined) {
     return <></>;
   }
+
   return (
-    <Container expand={true}>
-      <p>{props.post.title}</p>
-      <p>{formatDate(new Date(props.post.date))}</p>
-      <br />
-      <p>{props.post.blurb}</p>
-      <p>{props.post.post}</p>
-    </Container>
+    <>
+      <div className="flex flex-row justify-end">
+        <div className="flex flex-col justify-center">
+          <Container expand={false} className="flex justify-center">
+            <button
+              className="w-40 h-40 min-w-48 min-h-48"
+              onClick={() => {
+                navigate('/blog');
+              }}
+            >
+              Back to Blog
+            </button>
+          </Container>
+        </div>
+        <Container expand={false} className="grow flex flex-col justify-center">
+          <p>{props.post.title}</p>
+          <p>{formatDate(new Date(props.post.date))}</p>
+        </Container>
+        <div className="">
+          <Container>
+            <img
+              src={'/profilePic.webp'}
+              className="w-40 h-40 min-w-48 min-h-48"
+            />
+          </Container>
+        </div>
+      </div>
+      <hr className="w-48 mx-auto" />
+      <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
+        <Container expand={true}>
+          <p>{props.post.blurb}</p>
+          <p>{props.post.post}</p>
+        </Container>
+      </div>
+    </>
   );
 }
 
@@ -54,6 +100,8 @@ export interface BlogContainerProps {
 }
 
 export function BlogResumeContainer(props: BlogContainerProps) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
@@ -66,7 +114,12 @@ export function BlogResumeContainer(props: BlogContainerProps) {
           ))}
         </div>
         <div className="h-2" />
-        <button className="text-white outline p-1 px-2 rounded-sm bg-white bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40">
+        <button
+          className="text-white outline p-1 px-2 rounded-sm bg-white bg-opacity-0 hover:bg-opacity-20 active:bg-opacity-40"
+          onClick={() => {
+            navigate('/blog');
+          }}
+        >
           Show more . . .
         </button>
       </div>
@@ -92,13 +145,15 @@ export function BlogContainer(props: BlogContainerProps) {
   );
 }
 
+const paragraphAmount = 15;
+
 export const mockBlogPosts: BlogPostData[] = [
   {
     id_url: 'the-rise-of-typescript',
     title: 'The Rise of TypeScript',
     date: new Date(2023, 0, 1).getTime(), // January is 0
     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: "In this post, we explore the reasons behind TypeScript's success and why you should consider using it in your next project. From improved developer experience to enhanced code quality, TypeScript offers numerous benefits that can significantly boost your productivity and maintainability.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'understanding-javascript-closures',
@@ -106,21 +161,21 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 0, 8).getTime(), // January is 0
     blurb:
       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: "This article breaks down closures in a way that's easy to understand, with plenty of examples to guide you along the way. We'll dive into how closures work, why they are useful, and how you can leverage them to write more efficient and cleaner code in your JavaScript applications.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'guide-to-react-hooks',
     title: 'A Guide to React Hooks',
     date: new Date(2023, 1, 7).getTime(), // February is 1
     blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: "In this comprehensive guide, we'll cover everything you need to know about hooks, including useState, useEffect, and custom hooks. We'll explore practical examples and best practices to help you make the most out of React Hooks in your projects.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'css-grid-vs-flexbox',
     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
     date: new Date(2023, 2, 9).getTime(), // March is 2
     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: "This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job. This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'introduction-to-webassembly',
@@ -128,14 +183,14 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 3, 9).getTime(), // April is 3
     blurb:
       'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: "It allows for high-performance applications on the web. This introduction covers the basics of WebAssembly and how you can get started with it. We'll discuss its benefits, potential use cases, and provide a step-by-step guide to help you write and compile your first WebAssembly module.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'the-rise-of-typescript-duplicate1',
     title: 'The Rise of TypeScript',
     date: new Date(2023, 0, 1).getTime(), // January is 0
     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: "In this post, we explore the reasons behind TypeScript's success and why you should consider using it in your next project. From improved developer experience to enhanced code quality, TypeScript offers numerous benefits that can significantly boost your productivity and maintainability.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'understanding-javascript-closures-duplicate1',
@@ -143,21 +198,21 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 0, 8).getTime(), // January is 0
     blurb:
       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: "This article breaks down closures in a way that's easy to understand, with plenty of examples to guide you along the way. We'll dive into how closures work, why they are useful, and how you can leverage them to write more efficient and cleaner code in your JavaScript applications.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'guide-to-react-hooks-duplicate1',
     title: 'A Guide to React Hooks',
     date: new Date(2023, 1, 7).getTime(), // February is 1
     blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: "In this comprehensive guide, we'll cover everything you need to know about hooks, including useState, useEffect, and custom hooks. We'll explore practical examples and best practices to help you make the most out of React Hooks in your projects.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'css-grid-vs-flexbox-duplicate1',
     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
     date: new Date(2023, 2, 9).getTime(), // March is 2
     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: "This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'introduction-to-webassembly-duplicate1',
@@ -165,14 +220,14 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 3, 9).getTime(), // April is 3
     blurb:
       'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: "It allows for high-performance applications on the web. This introduction covers the basics of WebAssembly and how you can get started with it. We'll discuss its benefits, potential use cases, and provide a step-by-step guide to help you write and compile your first WebAssembly module.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'the-rise-of-typescript-duplicate2',
     title: 'The Rise of TypeScript',
     date: new Date(2023, 0, 1).getTime(), // January is 0
     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: "In this post, we explore the reasons behind TypeScript's success and why you should consider using it in your next project. From improved developer experience to enhanced code quality, TypeScript offers numerous benefits that can significantly boost your productivity and maintainability.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'understanding-javascript-closures-duplicate2',
@@ -180,21 +235,21 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 0, 8).getTime(), // January is 0
     blurb:
       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: "This article breaks down closures in a way that's easy to understand, with plenty of examples to guide you along the way. We'll dive into how closures work, why they are useful, and how you can leverage them to write more efficient and cleaner code in your JavaScript applications.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'guide-to-react-hooks-duplicate2',
     title: 'A Guide to React Hooks',
     date: new Date(2023, 1, 7).getTime(), // February is 1
     blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: "In this comprehensive guide, we'll cover everything you need to know about hooks, including useState, useEffect, and custom hooks. We'll explore practical examples and best practices to help you make the most out of React Hooks in your projects.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'css-grid-vs-flexbox-duplicate2',
     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
     date: new Date(2023, 2, 9).getTime(), // March is 2
     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: "This post compares them, highlighting their strengths and weaknesses, and providing guidance on when to use each. Whether you're building complex layouts or simple responsive designs, understanding the differences between CSS Grid and Flexbox will help you choose the right tool for the job.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
   {
     id_url: 'introduction-to-webassembly-duplicate2',
@@ -202,6 +257,6 @@ export const mockBlogPosts: BlogPostData[] = [
     date: new Date(2023, 3, 9).getTime(), // April is 3
     blurb:
       'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: "It allows for high-performance applications on the web. This introduction covers the basics of WebAssembly and how you can get started with it. We'll discuss its benefits, potential use cases, and provide a step-by-step guide to help you write and compile your first WebAssembly module.",
+    post: lorem.generateParagraphs(paragraphAmount),
   },
 ];

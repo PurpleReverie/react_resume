@@ -1,6 +1,4 @@
 export function formatDate(date: Date): string {
-  console.log(date);
-
   const monthNames = [
     'January',
     'February',

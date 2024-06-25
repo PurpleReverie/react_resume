@@ -17,6 +17,7 @@ import {
 } from 'react-router-dom';
 import { useEvent } from './hooks/useEvent';
 import { BlogPage } from './Pages/BlogPage';
+import ScrollToTop from './components/ScrollToTop';
 
 export interface ResumeContext {
   setResumeState: (state: string) => void;
@@ -29,8 +30,6 @@ export const AppStateContext = React.createContext<ResumeContext>({
 } as ResumeContext);
 
 function App() {
-  const navigate = useNavigate();
-  const { id } = useParams();
   const [questionState, setQuestionState] = useState('');
 
   const setResumeState = (state: string) => {
@@ -39,6 +38,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <AppStateContext.Provider value={{ setResumeState }}>
         <div className="App">
           <Background />
