@@ -16,15 +16,16 @@ export function ProjectsPage() {
   const { id } = useParams();
 
   const renderProjectCollectionPage = () => {
+    console.log(mockProjectEntries());
     return (
       <>
-        <ProjectContainer entrys={mockProjectEntries} />
+        <ProjectContainer entrys={mockProjectEntries()} />
       </>
     );
   };
 
   const renderProjectPost = () => {
-    const targetPost = mockProjectEntries.find((p) => p.project_id == id);
+    const targetPost = mockProjectEntries().find((p) => p.project_id == id);
     console.log(targetPost);
 
     return <ProjectPost projectEntry={targetPost} />;

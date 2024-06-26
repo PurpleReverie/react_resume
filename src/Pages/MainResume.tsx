@@ -112,7 +112,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <ProjectMainResumeContainer entrys={mockProjectEntries} />
+        <ProjectMainResumeContainer entrys={mockProjectEntries()} />
       </section>
     </div>
   );
