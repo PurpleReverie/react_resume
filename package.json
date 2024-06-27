@@ -24,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
-    "compileContent" : "yarn compileWork && yarn compileSkills", 
+    "compileContent": "yarn compileSetup && yarn compileWork && yarn compileSkills",
+    "compileSetup": "npx ts-node -P tsconfig.automation.json ./automation/compileSetup.ts",
     "compileWork": "npx ts-node -P tsconfig.automation.json ./automation/compileWork.ts",
     "compileSkills": "npx ts-node -P tsconfig.automation.json ./automation/compileSkill.ts",
     "deploy": "chmod +x ./deploy.sh && ./deploy.sh"
