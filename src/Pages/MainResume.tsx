@@ -5,17 +5,16 @@ import { BlogResumeContainer, mockBlogPosts } from '../components/resume/Blog';
 import {
   ResumeSkillPopupContainer,
   ResumeSkillsContainer,
-  testSkills,
+  SkillEntry,
 } from '../components/resume/Skills';
-import {
-  WorkExperienceResumeContainer,
-  mockWorkExperience as mockWorkExperiences,
-} from '../components/resume/WorkExperince';
+import { WorkExperienceResumeContainer } from '../components/resume/WorkExperince';
 import {
   ProjectMainResumeContainer,
   mockProjectEntries,
 } from '../components/resume/Projects';
 import useURLParams from '../hooks/useURLParams';
+import { userWorkExperience } from '../generated/work.generated';
+import { userSkills } from '../generated/skills.generated';
 
 /*
   first section
@@ -55,7 +54,7 @@ export default function ResumeSection() {
     <div className="w-full max-w-7xl p-6">
       {showSkill === true && (
         <ResumeSkillPopupContainer
-          skill={testSkills.find((s) => s.skillId === skill)}
+          skill={userSkills.find((s: SkillEntry) => s.slug === skill)}
         />
       )}
       <section>
@@ -100,7 +99,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <WorkExperienceResumeContainer entrys={mockWorkExperiences} />
+        <WorkExperienceResumeContainer entrys={userWorkExperience} />
       </section>
       <hr className={hrStyle} />
       <section>

@@ -1,0 +1,16 @@
+companyName: some company
+title: title at company
+startDate: 2024-06-27
+endDate: 2024-06-28
+skills:
+  - skill 1
+  - skill 2
+projects:
+  - > 
+    this is the first project, I did stuff
+  - >
+    this is the second project, I did stuff
+overview: >
+  this is the overview, this is the overview, 
+  this is the overview, this is the overview, 
+  this is the overview, 

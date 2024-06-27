@@ -1,13 +1,14 @@
 import React from 'react';
 import Container from '../Container';
 import { useNavigate } from 'react-router-dom';
+import { userSkills } from '../../generated/skills.generated';
 
 // TODO: create entries for skills, describing each of your skills and how you used it in the past
 
 export interface SkillEntry {
-  skillId: string;
-  skillName: string;
-  body: string;
+  slug: string;
+  name: string;
+  overview: string;
 }
 
 const skillBlockStyle =
@@ -21,7 +22,7 @@ export function ResumeSkillsContainer() {
         <h1>Skills</h1>
         <div className="h-4" />
         <div className="flex justify-center flex-wrap">
-          {testSkills.map((s, i) => (
+          {userSkills.map((s, i) => (
             <span
               key={i}
               className={skillBlockStyle}
@@ -29,13 +30,13 @@ export function ResumeSkillsContainer() {
                 const currentParams = new URLSearchParams(
                   window.location.search,
                 );
-                currentParams.set('skill', s.skillId);
+                currentParams.set('skill', s.slug);
                 navigate(
                   `${window.location.pathname}?${currentParams.toString()}`,
                 );
               }}
             >
-              {s.skillName}
+              {s.name}
             </span>
           ))}
         </div>
@@ -85,8 +86,8 @@ export function ResumeSkillPopupContainer(
           className="cursor-default px-16 py-4"
           onClick={(e: unknown) => (e as Event).stopPropagation()}
         >
-          <p>{props.skill.skillName}</p>
-          <p>{props.skill.body}</p>
+          <p>{props.skill.name}</p>
+          <p>{props.skill.overview}</p>
           <br />
           <button
             onClick={() => {
@@ -101,55 +102,55 @@ export function ResumeSkillPopupContainer(
   );
 }
 
-export const testSkills: SkillEntry[] = [
-  {
-    skillName: 'JavaScript',
-    skillId: 'javascript',
-    body: 'Proficient in JavaScript, including ES6+ features. Experience with frameworks such as React, Angular, and Vue.js.',
-  },
-  {
-    skillName: 'Python',
-    skillId: 'python',
-    body: 'Skilled in Python for data analysis, web development, and scripting. Familiar with libraries like NumPy, pandas, and Django.',
-  },
-  {
-    skillName: 'HTML & CSS',
-    skillId: 'HTMLCSS',
-    body: 'Experienced in creating responsive and accessible web pages using HTML5 and CSS3. Knowledge of CSS preprocessors like SASS and LESS.',
-  },
-  {
-    skillName: 'Java',
-    skillId: 'java',
-    body: 'Proficient in Java programming for building scalable backend systems. Experience with Spring and Hibernate frameworks.',
-  },
-  {
-    skillName: 'SQL',
-    skillId: 'SQL',
-    body: 'Adept at writing complex SQL queries for data retrieval and manipulation. Experience with databases like MySQL, PostgreSQL, and Oracle.',
-  },
-  {
-    skillName: 'DevOps',
-    skillId: 'devops',
-    body: 'Knowledgeable in DevOps practices including CI/CD, containerization (Docker), and orchestration (Kubernetes). Experience with tools like Jenkins, Git, and Ansible.',
-  },
-  {
-    skillName: 'Machine Learning',
-    skillId: 'machinelearning',
-    body: 'Familiar with machine learning concepts and algorithms. Experience using TensorFlow, Keras, and scikit-learn for building and deploying models.',
-  },
-  {
-    skillName: 'Git',
-    skillId: 'git',
-    body: 'Proficient in using Git for version control. Experience with branching, merging, and resolving conflicts in collaborative environments.',
-  },
-  {
-    skillName: 'C++',
-    skillId: 'cplusplus',
-    body: 'Experienced in C++ for system programming and game development. Knowledge of standard libraries and design patterns.',
-  },
-  {
-    skillName: 'Project Management',
-    skillId: 'projectmanagement',
-    body: 'Skilled in project management methodologies like Agile and Scrum. Experience in leading teams and managing project timelines and deliverables.',
-  },
-];
+// export const testSkills: SkillEntry[] = [
+//   {
+//     skillName: 'JavaScript',
+//     slug: 'javascript',
+//     body: 'Proficient in JavaScript, including ES6+ features. Experience with frameworks such as React, Angular, and Vue.js.',
+//   },
+//   {
+//     skillName: 'Python',
+//     slug: 'python',
+//     body: 'Skilled in Python for data analysis, web development, and scripting. Familiar with libraries like NumPy, pandas, and Django.',
+//   },
+//   {
+//     skillName: 'HTML & CSS',
+//     slug: 'HTMLCSS',
+//     body: 'Experienced in creating responsive and accessible web pages using HTML5 and CSS3. Knowledge of CSS preprocessors like SASS and LESS.',
+//   },
+//   {
+//     skillName: 'Java',
+//     slug: 'java',
+//     body: 'Proficient in Java programming for building scalable backend systems. Experience with Spring and Hibernate frameworks.',
+//   },
+//   {
+//     skillName: 'SQL',
+//     slug: 'SQL',
+//     body: 'Adept at writing complex SQL queries for data retrieval and manipulation. Experience with databases like MySQL, PostgreSQL, and Oracle.',
+//   },
+//   {
+//     skillName: 'DevOps',
+//     slug: 'devops',
+//     body: 'Knowledgeable in DevOps practices including CI/CD, containerization (Docker), and orchestration (Kubernetes). Experience with tools like Jenkins, Git, and Ansible.',
+//   },
+//   {
+//     skillName: 'Machine Learning',
+//     slug: 'machinelearning',
+//     body: 'Familiar with machine learning concepts and algorithms. Experience using TensorFlow, Keras, and scikit-learn for building and deploying models.',
+//   },
+//   {
+//     skillName: 'Git',
+//     slug: 'git',
+//     body: 'Proficient in using Git for version control. Experience with branching, merging, and resolving conflicts in collaborative environments.',
+//   },
+//   {
+//     skillName: 'C++',
+//     slug: 'cplusplus',
+//     body: 'Experienced in C++ for system programming and game development. Knowledge of standard libraries and design patterns.',
+//   },
+//   {
+//     skillName: 'Project Management',
+//     slug: 'projectmanagement',
+//     body: 'Skilled in project management methodologies like Agile and Scrum. Experience in leading teams and managing project timelines and deliverables.',
+//   },
+// ];
