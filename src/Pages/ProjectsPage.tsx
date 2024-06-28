@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  BlogContainer,
-  BlogPost,
-  mockBlogPosts,
-} from '../components/resume/Blog';
+import { BlogContainer, BlogPost } from '../components/resume/Blog';
 import { useParams } from 'react-router-dom';
 import Container from '../components/Container';
 import {

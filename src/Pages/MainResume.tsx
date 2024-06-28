@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../components/Container';
 import { useNavigate } from 'react-router-dom';
-import { BlogResumeContainer, mockBlogPosts } from '../components/resume/Blog';
+import { BlogResumeContainer } from '../components/resume/Blog';
 import {
   ResumeSkillPopupContainer,
   ResumeSkillsContainer,
@@ -15,6 +15,7 @@ import {
 import useURLParams from '../hooks/useURLParams';
 import { userWorkExperience } from '../generated/work.generated';
 import { userSkills } from '../generated/skills.generated';
+import { userBlogManifest } from '../generated/blog.generated';
 
 /*
   first section
@@ -107,7 +108,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <BlogResumeContainer posts={mockBlogPosts} />
+        <BlogResumeContainer posts={userBlogManifest} />
       </section>
       <hr className={hrStyle} />
       <section>

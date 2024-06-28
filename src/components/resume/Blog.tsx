@@ -3,6 +3,11 @@ import Container from '../Container';
 import { formatDate } from '../../utility/date';
 import { useNavigate } from 'react-router-dom';
 import { LoremIpsum } from 'lorem-ipsum';
+import { BlogPostEntryData } from '../../types/blogTypes';
+import ReactMarkdown from 'react-markdown';
+import useFetch from 'react-fetch-hook';
+import matter from 'gray-matter';
+import { getBlogPostURL } from '../../utility/generatedContent';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -15,16 +20,8 @@ const lorem = new LoremIpsum({
   },
 });
 
-export interface BlogPostData {
-  id_url: string;
-  title: string;
-  date: number;
-  blurb: string;
-  post: string;
-}
-
 export interface BlogPostProps {
-  post?: BlogPostData;
+  post?: BlogPostEntryData;
 }
 
 export function BlogPostEntry(props: BlogPostProps) {
@@ -36,7 +33,7 @@ export function BlogPostEntry(props: BlogPostProps) {
   return (
     <Container
       onClick={() => {
-        navigation(`/blog/${props.post?.id_url}`);
+        navigation(`/blog/${props.post?.slug}`);
       }}
       expand={true}
       className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300 cursor-pointer"
@@ -51,6 +48,11 @@ export function BlogPostEntry(props: BlogPostProps) {
 
 export function BlogPost(props: BlogPostProps) {
   const navigate = useNavigate();
+  const mdRequest = useFetch(getBlogPostURL(props.post?.file as string), {
+    formatter: (response) => response.text(),
+  });
+
+  console.log(mdRequest);
 
   if (props.post === undefined) {
     return <></>;
@@ -89,7 +91,10 @@ export function BlogPost(props: BlogPostProps) {
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
         <div className={'px-16'}>
           <Container expand={true}>
-            <p>{props.post.post}</p>
+            {/* <p>{props.post.post}</p> */}
+            {mdRequest.isLoading || (
+              <ReactMarkdown>{mdRequest.data}</ReactMarkdown>
+            )}
           </Container>
         </div>
       </div>
@@ -98,7 +103,7 @@ export function BlogPost(props: BlogPostProps) {
 }
 
 export interface BlogContainerProps {
-  posts: BlogPostData[];
+  posts: BlogPostEntryData[];
 }
 
 export function BlogResumeContainer(props: BlogContainerProps) {
@@ -174,116 +179,116 @@ export function BlogContainer(props: BlogContainerProps) {
 
 const paragraphAmount = 15;
 
-export const mockBlogPosts: BlogPostData[] = [
-  {
-    id_url: 'the-rise-of-typescript',
-    title: 'The Rise of TypeScript',
-    date: new Date(2023, 0, 1).getTime(), // January is 0
-    blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'understanding-javascript-closures',
-    title: 'Understanding JavaScript Closures',
-    date: new Date(2023, 0, 8).getTime(), // January is 0
-    blurb:
-      'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'guide-to-react-hooks',
-    title: 'A Guide to React Hooks',
-    date: new Date(2023, 1, 7).getTime(), // February is 1
-    blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'css-grid-vs-flexbox',
-    title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-    date: new Date(2023, 2, 9).getTime(), // March is 2
-    blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'introduction-to-webassembly',
-    title: 'Introduction to WebAssembly',
-    date: new Date(2023, 3, 9).getTime(), // April is 3
-    blurb:
-      'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'the-rise-of-typescript-duplicate1',
-    title: 'The Rise of TypeScript',
-    date: new Date(2023, 0, 1).getTime(), // January is 0
-    blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'understanding-javascript-closures-duplicate1',
-    title: 'Understanding JavaScript Closures',
-    date: new Date(2023, 0, 8).getTime(), // January is 0
-    blurb:
-      'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'guide-to-react-hooks-duplicate1',
-    title: 'A Guide to React Hooks',
-    date: new Date(2023, 1, 7).getTime(), // February is 1
-    blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'css-grid-vs-flexbox-duplicate1',
-    title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-    date: new Date(2023, 2, 9).getTime(), // March is 2
-    blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'introduction-to-webassembly-duplicate1',
-    title: 'Introduction to WebAssembly',
-    date: new Date(2023, 3, 9).getTime(), // April is 3
-    blurb:
-      'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'the-rise-of-typescript-duplicate2',
-    title: 'The Rise of TypeScript',
-    date: new Date(2023, 0, 1).getTime(), // January is 0
-    blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'understanding-javascript-closures-duplicate2',
-    title: 'Understanding JavaScript Closures',
-    date: new Date(2023, 0, 8).getTime(), // January is 0
-    blurb:
-      'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'guide-to-react-hooks-duplicate2',
-    title: 'A Guide to React Hooks',
-    date: new Date(2023, 1, 7).getTime(), // February is 1
-    blurb: 'React Hooks have revolutionized the way we write React components.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'css-grid-vs-flexbox-duplicate2',
-    title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-    date: new Date(2023, 2, 9).getTime(), // March is 2
-    blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-  {
-    id_url: 'introduction-to-webassembly-duplicate2',
-    title: 'Introduction to WebAssembly',
-    date: new Date(2023, 3, 9).getTime(), // April is 3
-    blurb:
-      'WebAssembly is a new type of code that can be run in modern web browsers.',
-    post: lorem.generateParagraphs(paragraphAmount),
-  },
-];
+// export const mockBlogPosts: BlogPostEntryData[] = [
+//   {
+//     id_url: 'the-rise-of-typescript',
+//     title: 'The Rise of TypeScript',
+//     date: new Date(2023, 0, 1).getTime(), // January is 0
+//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'understanding-javascript-closures',
+//     title: 'Understanding JavaScript Closures',
+//     date: new Date(2023, 0, 8).getTime(), // January is 0
+//     blurb:
+//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'guide-to-react-hooks',
+//     title: 'A Guide to React Hooks',
+//     date: new Date(2023, 1, 7).getTime(), // February is 1
+//     blurb: 'React Hooks have revolutionized the way we write React components.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'css-grid-vs-flexbox',
+//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
+//     date: new Date(2023, 2, 9).getTime(), // March is 2
+//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'introduction-to-webassembly',
+//     title: 'Introduction to WebAssembly',
+//     date: new Date(2023, 3, 9).getTime(), // April is 3
+//     blurb:
+//       'WebAssembly is a new type of code that can be run in modern web browsers.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'the-rise-of-typescript-duplicate1',
+//     title: 'The Rise of TypeScript',
+//     date: new Date(2023, 0, 1).getTime(), // January is 0
+//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'understanding-javascript-closures-duplicate1',
+//     title: 'Understanding JavaScript Closures',
+//     date: new Date(2023, 0, 8).getTime(), // January is 0
+//     blurb:
+//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'guide-to-react-hooks-duplicate1',
+//     title: 'A Guide to React Hooks',
+//     date: new Date(2023, 1, 7).getTime(), // February is 1
+//     blurb: 'React Hooks have revolutionized the way we write React components.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'css-grid-vs-flexbox-duplicate1',
+//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
+//     date: new Date(2023, 2, 9).getTime(), // March is 2
+//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'introduction-to-webassembly-duplicate1',
+//     title: 'Introduction to WebAssembly',
+//     date: new Date(2023, 3, 9).getTime(), // April is 3
+//     blurb:
+//       'WebAssembly is a new type of code that can be run in modern web browsers.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'the-rise-of-typescript-duplicate2',
+//     title: 'The Rise of TypeScript',
+//     date: new Date(2023, 0, 1).getTime(), // January is 0
+//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'understanding-javascript-closures-duplicate2',
+//     title: 'Understanding JavaScript Closures',
+//     date: new Date(2023, 0, 8).getTime(), // January is 0
+//     blurb:
+//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'guide-to-react-hooks-duplicate2',
+//     title: 'A Guide to React Hooks',
+//     date: new Date(2023, 1, 7).getTime(), // February is 1
+//     blurb: 'React Hooks have revolutionized the way we write React components.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'css-grid-vs-flexbox-duplicate2',
+//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
+//     date: new Date(2023, 2, 9).getTime(), // March is 2
+//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+//   {
+//     id_url: 'introduction-to-webassembly-duplicate2',
+//     title: 'Introduction to WebAssembly',
+//     date: new Date(2023, 3, 9).getTime(), // April is 3
+//     blurb:
+//       'WebAssembly is a new type of code that can be run in modern web browsers.',
+//     post: lorem.generateParagraphs(paragraphAmount),
+//   },
+// ];
