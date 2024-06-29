@@ -8,14 +8,12 @@ import {
   SkillEntry,
 } from '../components/resume/Skills';
 import { WorkExperienceResumeContainer } from '../components/resume/WorkExperince';
-import {
-  ProjectMainResumeContainer,
-  mockProjectEntries,
-} from '../components/resume/Projects';
+import { ProjectMainResumeContainer } from '../components/resume/Projects';
 import useURLParams from '../hooks/useURLParams';
 import { userWorkExperience } from '../generated/work.generated';
 import { userSkills } from '../generated/skills.generated';
 import { userBlogManifest } from '../generated/blog.generated';
+import { userProjectManifest } from '../generated/project.generated';
 
 /*
   first section
@@ -112,7 +110,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <ProjectMainResumeContainer entrys={mockProjectEntries()} />
+        <ProjectMainResumeContainer entrys={userProjectManifest} />
       </section>
     </div>
   );

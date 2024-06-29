@@ -2,26 +2,26 @@ import React from 'react';
 import { BlogContainer, BlogPost } from '../components/resume/Blog';
 import { useParams } from 'react-router-dom';
 import Container from '../components/Container';
-import {
-  ProjectContainer,
-  ProjectPost,
-  mockProjectEntries,
-} from '../components/resume/Projects';
+import { ProjectContainer, ProjectPost } from '../components/resume/Projects';
+import { userProjectManifest } from '../generated/project.generated';
+import { ProjectEntryData } from '../types/projectTypes';
 
 export function ProjectsPage() {
   const { id } = useParams();
 
   const renderProjectCollectionPage = () => {
-    console.log(mockProjectEntries());
+    console.log(userProjectManifest);
     return (
       <>
-        <ProjectContainer entrys={mockProjectEntries()} />
+        <ProjectContainer entrys={userProjectManifest} />
       </>
     );
   };
 
   const renderProjectPost = () => {
-    const targetPost = mockProjectEntries().find((p) => p.project_id == id);
+    const targetPost = userProjectManifest.find(
+      (p) => p.slug == id,
+    ) as ProjectEntryData;
     console.log(targetPost);
 
     return <ProjectPost projectEntry={targetPost} />;

@@ -2,17 +2,10 @@ import React from 'react';
 import Container from '../Container';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../utility/date';
-
-export interface ProjectEntryData {
-  project_id: string;
-  title: string;
-  startDate: number;
-  endDate: number;
-  blurb: string;
-  body: string;
-  skills: string[];
-  company: string;
-}
+import { ProjectEntryData } from '../../types/projectTypes';
+import ReactMarkdown from 'react-markdown';
+import useFetch from 'react-fetch-hook';
+import { getProjectPostURL } from '../../utility/generatedContent';
 
 export interface ProjectMainResumeEntryProps {
   entry: ProjectEntryData;
@@ -26,7 +19,7 @@ export function ProjectEntry(props: ProjectMainResumeEntryProps) {
       className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300 cursor-pointer"
       expand={true}
       onClick={() => {
-        navigate(`/project/${props.entry.project_id}`);
+        navigate(`/project/${props.entry.slug}`);
       }}
     >
       <p>{props.entry.title}</p>
@@ -128,11 +121,14 @@ export function ProjectContainer(props: ProjectContainerProps) {
 }
 
 export interface ProjectPostProp {
-  projectEntry?: ProjectEntryData;
+  projectEntry: ProjectEntryData;
 }
 
 export function ProjectPost(props: ProjectPostProp) {
   const navigate = useNavigate();
+  const mdRequest = useFetch(getProjectPostURL(props.projectEntry.file), {
+    formatter: (response) => response.text(),
+  });
 
   if (props.projectEntry === undefined) {
     return <></>;
@@ -174,7 +170,9 @@ export function ProjectPost(props: ProjectPostProp) {
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
         <div className={'px-16'}>
           <Container expand={true}>
-            <p>{props.projectEntry.body}</p>
+            {mdRequest.isLoading || (
+              <ReactMarkdown>{mdRequest.data as string}</ReactMarkdown>
+            )}
           </Container>
         </div>
       </div>
@@ -182,68 +180,68 @@ export function ProjectPost(props: ProjectPostProp) {
   );
 }
 
-export function mockProjectEntries(): ProjectEntryData[] {
-  return [
-    {
-      project_id: 'web-application-development',
-      title: 'Web Application Development',
-      startDate: new Date('2022-01-01').getTime(),
-      endDate: new Date('2022-06-30').getTime(),
-      blurb: 'Developed a cutting-edge web application for a tech company.',
-      body: 'Developed a full-stack web application using React, Node.js, and MongoDB. The project involved creating a responsive user interface, implementing server-side logic, and integrating with a NoSQL database.',
-      skills: ['React', 'Node.js', 'MongoDB', 'JavaScript', 'CSS'],
-      company: 'Tech Solutions Inc.',
-    },
-    {
-      project_id: 'mobile-app-design',
-      title: 'Mobile App Design',
-      startDate: new Date('2021-05-15').getTime(),
-      endDate: new Date('2021-12-15').getTime(),
-      blurb: 'Designed and developed a mobile app for both major platforms.',
-      body: 'Designed and developed a mobile application for both Android and iOS platforms. The app featured a user-friendly interface, seamless navigation, and integration with backend services.',
-      skills: ['React Native', 'Java', 'Swift', 'UI/UX Design'],
-      company: 'Creative Apps Ltd.',
-    },
-    {
-      project_id: 'cloud-infrastructure-setup',
-      title: 'Cloud Infrastructure Setup',
-      startDate: new Date('2023-02-01').getTime(),
-      endDate: new Date('2023-08-31').getTime(),
-      blurb: 'Implemented cloud solutions for scalable infrastructure.',
-      body: 'Set up and managed cloud infrastructure using AWS and Terraform. The project included creating scalable deployments, automating infrastructure provisioning, and ensuring high availability.',
-      skills: ['AWS', 'Terraform', 'Docker', 'Kubernetes'],
-      company: 'Cloud Innovators',
-    },
-    {
-      project_id: 'e-commerce-platform-development',
-      title: 'E-commerce Platform Development',
-      startDate: new Date('2020-03-01').getTime(),
-      endDate: new Date('2020-12-01').getTime(),
-      blurb: 'Built a scalable e-commerce platform from scratch.',
-      body: 'Developed a scalable e-commerce platform using Magento and integrated it with various payment gateways. The project involved customizing the platform, optimizing performance, and ensuring secure transactions.',
-      skills: ['Magento', 'PHP', 'MySQL', 'Payment Gateway Integration'],
-      company: 'E-Shop Solutions',
-    },
-    {
-      project_id: 'data-analysis-and-visualization',
-      title: 'Data Analysis and Visualization',
-      startDate: new Date('2021-09-01').getTime(),
-      endDate: new Date('2022-02-28').getTime(),
-      blurb:
-        'Analyzed data and created visual reports to drive business decisions.',
-      body: 'Conducted data analysis and created visualizations using Python and Tableau to support business decision-making. The project included data cleaning, statistical analysis, and creating interactive dashboards.',
-      skills: ['Python', 'Tableau', 'Data Analysis', 'Pandas'],
-      company: 'Data Insights Corp.',
-    },
-    {
-      project_id: 'api-development',
-      title: 'API Development',
-      startDate: new Date('2023-04-01').getTime(),
-      endDate: new Date('2023-10-01').getTime(),
-      blurb: 'Developed secure and scalable APIs for a fintech application.',
-      body: 'Developed RESTful APIs for a fintech application, ensuring robust security and scalability. The project involved designing API endpoints, implementing authentication, and optimizing performance.',
-      skills: ['RESTful APIs', 'Python', 'Flask', 'SQL'],
-      company: 'Fintech Innovators',
-    },
-  ];
-}
+// export function mockProjectEntries(): ProjectEntryData[] {
+//   return [
+//     {
+//       slug: 'web-application-development',
+//       title: 'Web Application Development',
+//       startDate: new Date('2022-01-01').getTime(),
+//       endDate: new Date('2022-06-30').getTime(),
+//       blurb: 'Developed a cutting-edge web application for a tech company.',
+//       body: 'Developed a full-stack web application using React, Node.js, and MongoDB. The project involved creating a responsive user interface, implementing server-side logic, and integrating with a NoSQL database.',
+//       skills: ['React', 'Node.js', 'MongoDB', 'JavaScript', 'CSS'],
+//       company: 'Tech Solutions Inc.',
+//     },
+//     {
+//       slug: 'mobile-app-design',
+//       title: 'Mobile App Design',
+//       startDate: new Date('2021-05-15').getTime(),
+//       endDate: new Date('2021-12-15').getTime(),
+//       blurb: 'Designed and developed a mobile app for both major platforms.',
+//       body: 'Designed and developed a mobile application for both Android and iOS platforms. The app featured a user-friendly interface, seamless navigation, and integration with backend services.',
+//       skills: ['React Native', 'Java', 'Swift', 'UI/UX Design'],
+//       company: 'Creative Apps Ltd.',
+//     },
+//     {
+//       slug: 'cloud-infrastructure-setup',
+//       title: 'Cloud Infrastructure Setup',
+//       startDate: new Date('2023-02-01').getTime(),
+//       endDate: new Date('2023-08-31').getTime(),
+//       blurb: 'Implemented cloud solutions for scalable infrastructure.',
+//       body: 'Set up and managed cloud infrastructure using AWS and Terraform. The project included creating scalable deployments, automating infrastructure provisioning, and ensuring high availability.',
+//       skills: ['AWS', 'Terraform', 'Docker', 'Kubernetes'],
+//       company: 'Cloud Innovators',
+//     },
+//     {
+//       slug: 'e-commerce-platform-development',
+//       title: 'E-commerce Platform Development',
+//       startDate: new Date('2020-03-01').getTime(),
+//       endDate: new Date('2020-12-01').getTime(),
+//       blurb: 'Built a scalable e-commerce platform from scratch.',
+//       body: 'Developed a scalable e-commerce platform using Magento and integrated it with various payment gateways. The project involved customizing the platform, optimizing performance, and ensuring secure transactions.',
+//       skills: ['Magento', 'PHP', 'MySQL', 'Payment Gateway Integration'],
+//       company: 'E-Shop Solutions',
+//     },
+//     {
+//       slug: 'data-analysis-and-visualization',
+//       title: 'Data Analysis and Visualization',
+//       startDate: new Date('2021-09-01').getTime(),
+//       endDate: new Date('2022-02-28').getTime(),
+//       blurb:
+//         'Analyzed data and created visual reports to drive business decisions.',
+//       body: 'Conducted data analysis and created visualizations using Python and Tableau to support business decision-making. The project included data cleaning, statistical analysis, and creating interactive dashboards.',
+//       skills: ['Python', 'Tableau', 'Data Analysis', 'Pandas'],
+//       company: 'Data Insights Corp.',
+//     },
+//     {
+//       slug: 'api-development',
+//       title: 'API Development',
+//       startDate: new Date('2023-04-01').getTime(),
+//       endDate: new Date('2023-10-01').getTime(),
+//       blurb: 'Developed secure and scalable APIs for a fintech application.',
+//       body: 'Developed RESTful APIs for a fintech application, ensuring robust security and scalability. The project involved designing API endpoints, implementing authentication, and optimizing performance.',
+//       skills: ['RESTful APIs', 'Python', 'Flask', 'SQL'],
+//       company: 'Fintech Innovators',
+//     },
+//   ];
+// }
