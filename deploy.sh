@@ -51,6 +51,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "compiling cms content"
+npm run compileContent
+echo "finished compiling"
+
 npm run build
 if [ $? -ne 0 ]; then
   echo "npm build failed!"
