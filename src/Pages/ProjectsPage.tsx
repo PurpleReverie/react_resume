@@ -5,6 +5,7 @@ import Container from '../components/Container';
 import { ProjectContainer, ProjectPost } from '../components/resume/Projects';
 import { userProjectManifest } from '../generated/project.generated';
 import { ProjectEntryData } from '../types/projectTypes';
+import { PageContainerStyle } from '../utility/styles';
 
 export function ProjectsPage() {
   const { id } = useParams();
@@ -13,13 +14,13 @@ export function ProjectsPage() {
     console.log(userProjectManifest);
     return (
       <>
-        <ProjectContainer entrys={userProjectManifest} />
+        <ProjectContainer entrys={userProjectManifest()} />
       </>
     );
   };
 
   const renderProjectPost = () => {
-    const targetPost = userProjectManifest.find(
+    const targetPost = userProjectManifest().find(
       (p) => p.slug == id,
     ) as ProjectEntryData;
     console.log(targetPost);
@@ -29,7 +30,7 @@ export function ProjectsPage() {
 
   return (
     <>
-      <div className="w-full max-w-7xl p-6">
+      <div className={PageContainerStyle}>
         {id === undefined && renderProjectCollectionPage()}
         {id && renderProjectPost()}
       </div>

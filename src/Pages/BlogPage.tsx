@@ -3,6 +3,8 @@ import { BlogContainer, BlogPost } from '../components/resume/Blog';
 import { useParams } from 'react-router-dom';
 import Container from '../components/Container';
 import { userBlogManifest } from '../generated/blog.generated';
+import { PageContainerStyle } from '../utility/styles';
+import { BlogPostEntryData } from '../types/blogTypes';
 
 export function BlogPage() {
   const { id } = useParams();
@@ -12,8 +14,9 @@ export function BlogPage() {
   };
 
   const renderBlogPost = () => {
-    const targetPost = userBlogManifest.find((p) => p.slug == id);
-    console.log(targetPost);
+    const targetPost = userBlogManifest.find(
+      (p) => p.slug == id,
+    ) as BlogPostEntryData;
 
     return (
       <>
@@ -24,7 +27,7 @@ export function BlogPage() {
 
   return (
     <>
-      <div className="w-full max-w-7xl p-6">
+      <div className={PageContainerStyle}>
         {id === undefined && renderBlogCollectionPage()}
         {id && renderBlogPost()}
       </div>

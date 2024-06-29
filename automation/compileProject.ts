@@ -79,7 +79,9 @@ const outPutFile = `
 // generated
 import { ProjectEntryData } from '../types/projectTypes';
 
-export const userProjectManifest: ProjectEntryData[] = ${jsonToJsObjectString(JSON.stringify(projectManifest))}
+export function userProjectManifest(): ProjectEntryData[] {
+  return ${jsonToJsObjectString(JSON.stringify(projectManifest))}
+}
 `;
 console.log(outPutFile);
 fs.writeFileSync('./src/generated/project.generated.ts', outPutFile);

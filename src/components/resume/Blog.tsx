@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '../Container';
 import { formatDate } from '../../utility/date';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,8 @@ import ReactMarkdown from 'react-markdown';
 import useFetch from 'react-fetch-hook';
 import matter from 'gray-matter';
 import { getBlogPostURL } from '../../utility/generatedContent';
+import useIsMobile from '../../hooks/useMobile';
+import { renderIntoDocument } from 'react-dom/test-utils';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -21,7 +23,7 @@ const lorem = new LoremIpsum({
 });
 
 export interface BlogPostProps {
-  post?: BlogPostEntryData;
+  post: BlogPostEntryData;
 }
 
 export function BlogPostEntry(props: BlogPostProps) {
@@ -51,45 +53,64 @@ export function BlogPost(props: BlogPostProps) {
   const mdRequest = useFetch(getBlogPostURL(props.post?.file as string), {
     formatter: (response) => response.text(),
   });
-
-  console.log(mdRequest);
+  const isMobile = useIsMobile(768);
 
   if (props.post === undefined) {
     return <></>;
   }
 
+  const renderBackButton = () => (
+    <div className="flex flex-col justify-center">
+      <Container expand={false} className="flex justify-center">
+        <button
+          className="w-40 h-40 min-w-48 min-h-48"
+          onClick={() => {
+            navigate('/blog');
+          }}
+        >
+          Back to Blog
+        </button>
+      </Container>
+    </div>
+  );
+
+  const renderTitle = () => (
+    <Container expand={false} className="grow flex flex-col justify-center">
+      <p>{props.post.title}</p>
+      <p>{formatDate(new Date(props.post.date))}</p>
+      <p>{props.post.blurb}</p>
+    </Container>
+  );
+  const renderImage = () => (
+    <div className="">
+      <Container>
+        <img
+          src={'/profilePic.webp'}
+          className={!isMobile ? 'w-40 h-40 min-w-48 min-h-48' : ''}
+        />
+      </Container>
+    </div>
+  );
+
   return (
     <>
-      <div className="flex flex-row justify-end">
-        <div className="flex flex-col justify-center">
-          <Container expand={false} className="flex justify-center">
-            <button
-              className="w-40 h-40 min-w-48 min-h-48"
-              onClick={() => {
-                navigate('/blog');
-              }}
-            >
-              Back to Blog
-            </button>
-          </Container>
+      {!isMobile && (
+        <div className="flex flex-row justify-end">
+          {renderBackButton()}
+          {renderTitle()}
+          {renderImage()}
         </div>
-        <Container expand={false} className="grow flex flex-col justify-center">
-          <p>{props.post.title}</p>
-          <p>{formatDate(new Date(props.post.date))}</p>
-          <p>{props.post.blurb}</p>
-        </Container>
-        <div className="">
-          <Container>
-            <img
-              src={'/profilePic.webp'}
-              className="w-40 h-40 min-w-48 min-h-48"
-            />
-          </Container>
+      )}
+      {isMobile && (
+        <div className="flex flex-col justify-end">
+          {renderImage()}
+          {renderTitle()}
         </div>
-      </div>
+      )}
+
       <hr className="w-48 mx-auto" />
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
-        <div className={'px-16'}>
+        <div className={'md:px-16 px-0'}>
           <Container expand={true}>
             {/* <p>{props.post.post}</p> */}
             {mdRequest.isLoading || (
@@ -115,7 +136,7 @@ export function BlogResumeContainer(props: BlogContainerProps) {
         <Container className={'mb-[8px]'} expand={true}>
           <h1>My Blog . . . .</h1>
         </Container>
-        <div className={'px-16'}>
+        <div className={'md:px-16 px-0'}>
           {props.posts.slice(0, 3).map((p, i) => (
             <BlogPostEntry key={i} post={p} />
           ))}
@@ -136,37 +157,60 @@ export function BlogResumeContainer(props: BlogContainerProps) {
 
 export function BlogContainer(props: BlogContainerProps) {
   const navigate = useNavigate();
+  const isMobile = useIsMobile(768);
+
+  console.log(isMobile);
+
+  const renderBackButton = () => (
+    <div className="flex flex-col justify-center">
+      <Container expand={false} className="flex justify-center">
+        <button
+          className="w-40 h-40 min-w-48 min-h-48"
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          Back to Home
+        </button>
+      </Container>
+    </div>
+  );
+
+  const renderTilte = () => (
+    <Container expand={false} className="grow flex flex-col justify-center">
+      <h1>My Blog . . . .</h1>
+    </Container>
+  );
+
+  const renderImage = () => (
+    <div className="">
+      <Container>
+        <img
+          src={'/profilePic.webp'}
+          className={!isMobile ? 'w-40 h-40 min-w-48 min-h-48' : ''}
+        />
+      </Container>
+    </div>
+  );
 
   return (
     <>
-      <div className="flex flex-row justify-end">
-        <div className="flex flex-col justify-center">
-          <Container expand={false} className="flex justify-center">
-            <button
-              className="w-40 h-40 min-w-48 min-h-48"
-              onClick={() => {
-                navigate('/');
-              }}
-            >
-              Back to Home
-            </button>
-          </Container>
+      {!isMobile && (
+        <div className="flex flex-row justify-end">
+          {renderBackButton()}
+          {renderTilte()}
+          {renderImage()}
         </div>
-        <Container expand={false} className="grow flex flex-col justify-center">
-          <h1>My Blog . . . .</h1>
-        </Container>
-        <div className="">
-          <Container>
-            <img
-              src={'/profilePic.webp'}
-              className="w-40 h-40 min-w-48 min-h-48"
-            />
-          </Container>
+      )}
+      {isMobile && (
+        <div className="flex flex-col justify-end">
+          {renderImage()}
+          {renderTilte()}
         </div>
-      </div>
+      )}
 
       <div className={'my-4 bg-[#000000] bg-opacity-20 py-[12px] rounded-lg'}>
-        <div className={'px-16'}>
+        <div className={'md:px-16 px-0'}>
           {props.posts.map((p, i) => (
             <BlogPostEntry key={i} post={p} />
           ))}
@@ -176,119 +220,3 @@ export function BlogContainer(props: BlogContainerProps) {
     </>
   );
 }
-
-const paragraphAmount = 15;
-
-// export const mockBlogPosts: BlogPostEntryData[] = [
-//   {
-//     id_url: 'the-rise-of-typescript',
-//     title: 'The Rise of TypeScript',
-//     date: new Date(2023, 0, 1).getTime(), // January is 0
-//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'understanding-javascript-closures',
-//     title: 'Understanding JavaScript Closures',
-//     date: new Date(2023, 0, 8).getTime(), // January is 0
-//     blurb:
-//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'guide-to-react-hooks',
-//     title: 'A Guide to React Hooks',
-//     date: new Date(2023, 1, 7).getTime(), // February is 1
-//     blurb: 'React Hooks have revolutionized the way we write React components.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'css-grid-vs-flexbox',
-//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-//     date: new Date(2023, 2, 9).getTime(), // March is 2
-//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'introduction-to-webassembly',
-//     title: 'Introduction to WebAssembly',
-//     date: new Date(2023, 3, 9).getTime(), // April is 3
-//     blurb:
-//       'WebAssembly is a new type of code that can be run in modern web browsers.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'the-rise-of-typescript-duplicate1',
-//     title: 'The Rise of TypeScript',
-//     date: new Date(2023, 0, 1).getTime(), // January is 0
-//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'understanding-javascript-closures-duplicate1',
-//     title: 'Understanding JavaScript Closures',
-//     date: new Date(2023, 0, 8).getTime(), // January is 0
-//     blurb:
-//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'guide-to-react-hooks-duplicate1',
-//     title: 'A Guide to React Hooks',
-//     date: new Date(2023, 1, 7).getTime(), // February is 1
-//     blurb: 'React Hooks have revolutionized the way we write React components.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'css-grid-vs-flexbox-duplicate1',
-//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-//     date: new Date(2023, 2, 9).getTime(), // March is 2
-//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'introduction-to-webassembly-duplicate1',
-//     title: 'Introduction to WebAssembly',
-//     date: new Date(2023, 3, 9).getTime(), // April is 3
-//     blurb:
-//       'WebAssembly is a new type of code that can be run in modern web browsers.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'the-rise-of-typescript-duplicate2',
-//     title: 'The Rise of TypeScript',
-//     date: new Date(2023, 0, 1).getTime(), // January is 0
-//     blurb: 'TypeScript has seen a meteoric rise in popularity in recent years.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'understanding-javascript-closures-duplicate2',
-//     title: 'Understanding JavaScript Closures',
-//     date: new Date(2023, 0, 8).getTime(), // January is 0
-//     blurb:
-//       'Closures are a fundamental concept in JavaScript that can be tricky to grasp.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'guide-to-react-hooks-duplicate2',
-//     title: 'A Guide to React Hooks',
-//     date: new Date(2023, 1, 7).getTime(), // February is 1
-//     blurb: 'React Hooks have revolutionized the way we write React components.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'css-grid-vs-flexbox-duplicate2',
-//     title: 'CSS Grid vs. Flexbox: Which Should You Use?',
-//     date: new Date(2023, 2, 9).getTime(), // March is 2
-//     blurb: 'CSS Grid and Flexbox are two powerful layout systems in CSS.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-//   {
-//     id_url: 'introduction-to-webassembly-duplicate2',
-//     title: 'Introduction to WebAssembly',
-//     date: new Date(2023, 3, 9).getTime(), // April is 3
-//     blurb:
-//       'WebAssembly is a new type of code that can be run in modern web browsers.',
-//     post: lorem.generateParagraphs(paragraphAmount),
-//   },
-// ];

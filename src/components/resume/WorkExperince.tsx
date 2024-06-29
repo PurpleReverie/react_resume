@@ -56,7 +56,7 @@ export function WorkExperienceResumeContainer(
         <Container className={'mb-[8px]'} expand={true}>
           <h1>My Journey in Software</h1>
         </Container>
-        <div className={'px-16'}>
+        <div className={'md:px-16 px-0'}>
           {props.entrys.map((e, i) => (
             <WorkExperienceResumeEntry key={i} entry={e} />
           ))}

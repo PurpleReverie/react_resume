@@ -14,6 +14,7 @@ import { userWorkExperience } from '../generated/work.generated';
 import { userSkills } from '../generated/skills.generated';
 import { userBlogManifest } from '../generated/blog.generated';
 import { userProjectManifest } from '../generated/project.generated';
+import { PageContainerStyle } from '../utility/styles';
 
 /*
   first section
@@ -50,7 +51,7 @@ export default function ResumeSection() {
   }
 
   return (
-    <div className="w-full max-w-7xl p-6">
+    <div className={PageContainerStyle}>
       {showSkill === true && (
         <ResumeSkillPopupContainer
           skill={userSkills.find((s: SkillEntry) => s.slug === skill)}
@@ -76,7 +77,7 @@ export default function ResumeSection() {
         </Container>
       </section>
       <section>
-        <div className="flex flex-row justify-center">
+        <div className="flex md:flex-row justify-center flex-col">
           <div className={firstSectionColumnStyle}>
             <Container expand={true}>
               <img src={'/profilePic.webp'} />
@@ -110,7 +111,7 @@ export default function ResumeSection() {
       </section>
       <hr className={hrStyle} />
       <section>
-        <ProjectMainResumeContainer entrys={userProjectManifest} />
+        <ProjectMainResumeContainer entrys={userProjectManifest()} />
       </section>
     </div>
   );
