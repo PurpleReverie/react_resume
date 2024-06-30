@@ -34,6 +34,12 @@ export function WorkExperienceResumeEntry(
           {props.entry.projects.map((p, i) => (
             <div
               className="outline outline-gray-200 m-1 mx-auto p-2 max-w-3xl rounded-sm"
+              style={{
+                wordBreak: 'break-word',
+                // overflowWrap: 'break-word',
+                // wordWrap: 'break-word',
+                // whiteSpace: 'normal',
+              }}
               key={i}
             >
               {p}
