@@ -10,14 +10,23 @@ export interface WorkExperienceResumeEntryProps {
 export function WorkExperienceResumeEntry(
   props: WorkExperienceResumeEntryProps,
 ) {
+  const formatDate = (dateNumber: number) => {
+    const date = new Date(dateNumber);
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'long' }); // Use 'short' for abbreviated month name
+    const formattedDate = `${year} ${month}`;
+
+    return formattedDate;
+  };
+
   return (
     <>
       <Container expand={true}>
         <p>{props.entry.companyName}</p>
         <p>{props.entry.title}</p>
         <p>
-          {new Date(props.entry.startDate).toDateString()} -
-          {new Date(props.entry.endDate).toDateString()}
+          {formatDate(props.entry.startDate)} -{' '}
+          {formatDate(props.entry.endDate)}
         </p>
         <p>{props.entry.overview}</p>
         <div className="h-4" />
@@ -57,9 +66,11 @@ export function WorkExperienceResumeContainer(
           <h1>My Journey in Software</h1>
         </Container>
         <div className={'md:px-16 px-0'}>
-          {props.entrys.map((e, i) => (
-            <WorkExperienceResumeEntry key={i} entry={e} />
-          ))}
+          {props.entrys
+            .sort((a, b) => b.startDate - a.startDate)
+            .map((e, i) => (
+              <WorkExperienceResumeEntry key={i} entry={e} />
+            ))}
         </div>
       </div>
     </>

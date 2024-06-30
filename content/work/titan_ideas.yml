@@ -1,0 +1,19 @@
+companyName: Titan Ideas (A start up)
+title: Unity Developer
+startDate: 2017-01-01
+endDate: 2029-10-01
+skills:
+  - Unity 3D
+  - Game Development
+  - C#
+overview: >
+  A start up developing edutainment ip through Augmented Reality and Virtual Reality technologies and entertainment mobile apps.
+projects:
+  - > 
+    An augmented reality "colouring book", where kids can color in pages provided by the app, and upon being scanned by the devices camera, a 3d character assumes the "drawing" provided by the child.
+  - > 
+    An augmented reality story app created for a local client, to tell local cultural mythological stories AR form
+  - > 
+    Interactive reading book app, where children could click words from the digital book and through would be read back to them
+  - > 
+    Various internal AR and VR app prototypes

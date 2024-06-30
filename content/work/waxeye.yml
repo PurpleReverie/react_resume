@@ -1,0 +1,26 @@
+companyName: Waxeye
+title: Unity Developer / Front end developer
+startDate: 2019-11-01
+endDate: 2022-11-01
+skills:
+  - Unity 3D 
+  - Game Development
+  - C#
+  - Javascript
+  - Typescript
+  - React
+  - Vue
+  - Three JS
+overview: >
+  A digital agency based in the Auckland CBD ponsonby, providing boutique digital experiences for clients
+projects:
+  - > 
+    A 3D website created for the New Zealand Pavilion building during the Dubai world trade expo. The virtual website allowed users to experience the building without visiting the site during the pandemic. Built using Three JS and Vue. As the senior game developer, acted as a liaison between the web developers on the project and the technical artists on the team, provided a variety of in house tools for project: a three js component system; a progressive asset download system for fine grain control of downloading of complex 3d assets.
+  - > 
+    Various Augmented Reality and Virtual Reality experiences for clients built using unity 3d.
+  - > 
+    Internal 3D website prototypes built using React Fiber for potential clients
+  - >
+    Automated build solution for Unity Development to assist technical artist with rapid asset integration
+    
+    

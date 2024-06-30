@@ -1,0 +1,16 @@
+companyName: Masters Of Creative Technology
+title: Evaluating the Perceived Immersion of Procedurally Generated Game Levels
+startDate: 2015-01-01
+endDate: 2016-01-01
+skills:
+  - Unity 3D
+  - Game Development
+  - C#
+  - C++
+  - Research
+  - Genetic Algorithms
+overview: >
+  Master thesis for Creative Technology Program. 
+projects:
+  - > 
+    Developed a top down shooter game that utilizes an A* based heuristic for a genetic algorithm based procedural content generator. Proceeded to do a study to measure the perceived immersion of the content produced by the genetic algorithm generator vs content produced by human content designers. Evaluating the Perceived Immersion of Procedurally Generated Game Levels: https://openrepository.aut.ac.nz/items/899c0cce-a301-4fbb-ac99-769e25f41606

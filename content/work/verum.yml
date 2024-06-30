@@ -1,0 +1,29 @@
+companyName: Verum Digital
+title: Full Stack Developer
+startDate: 2022-11-01
+endDate: 2024-05-22
+skills:
+  - Unity 3D 
+  - Game Development
+  - C#
+  - Javascript
+  - Typescript
+  - React
+  - Mongo DB
+  - Next JS
+  - Nest JS
+  - AWS
+  - Terraform
+  - Shopify
+  - Graph QL
+overview: >
+  A digital agency based in the Auckland CBD, around the corner from Britomart in the CBD. Providing bespoke solutions for a range of clients.
+projects:
+  - > 
+    Edutainment mobile game, designed to teach kids arabic, built with Unity 3D. Also includes a nest js server for processing user accounts, user game progression and cross platform receipt validation to ensure user mobile purchases are respected across platforms. Also included a front end react app to allow users to manage their accounts and view their child's progress from a frontend website.
+  - > 
+    Nest JS application, hosted in AWS to sync client inventory from a variety of different sources to a shopify site. All deployed in AWS and heavy use of Shopifys graph ql api.
+  - > 
+    ECommerce site created using Wordpress, woocommerce, and Webpack for a bespoke frontend experience.
+  - >
+    A range of the support work for the maintenance of the various projects.
