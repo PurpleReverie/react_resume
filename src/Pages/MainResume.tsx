@@ -70,10 +70,9 @@ export default function ResumeSection() {
         </Container>
         <Container>
           <p>
-            This Resume Portfolio site is a <b>WORK IN PROGRESS</b>, and the
-            content on this site is fictitious while it is being built. That
-            said, I AM a full stack software engineer, and if you want to grab a
-            copy of my resume, please email me using the email address above
+            This Resume Portfolio site is a <b>WORK IN PROGRESS</b>. I AM a full
+            stack software engineer, and if you want to grab a copy of my
+            resume, please email me using the email address above
           </p>
         </Container>
       </section>

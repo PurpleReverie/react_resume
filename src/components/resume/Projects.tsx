@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import useFetch from 'react-fetch-hook';
 import { getProjectPostURL } from '../../utility/generatedContent';
 import useIsMobile from '../../hooks/useMobile';
+import { format } from 'path';
 
 export interface ProjectMainResumeEntryProps {
   entry: ProjectEntryData;
@@ -14,6 +15,15 @@ export interface ProjectMainResumeEntryProps {
 
 export function ProjectEntry(props: ProjectMainResumeEntryProps) {
   const navigate = useNavigate();
+
+  const formatDate = (dateNumber: number) => {
+    const date = new Date(dateNumber);
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'long' }); // Use 'short' for abbreviated month name
+    const formattedDate = `${year} ${month}`;
+
+    return formattedDate;
+  };
 
   return (
     <Container
@@ -25,7 +35,7 @@ export function ProjectEntry(props: ProjectMainResumeEntryProps) {
     >
       <p>{props.entry.title}</p>
       <p>
-        {props.entry.startDate} - {props.entry.endDate}
+        {formatDate(props.entry.startDate)} - {formatDate(props.entry.endDate)}
       </p>
       <p>{props.entry.blurb}</p>
       <p>
