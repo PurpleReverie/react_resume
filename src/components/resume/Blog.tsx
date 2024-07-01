@@ -10,6 +10,7 @@ import matter from 'gray-matter';
 import { getBlogPostURL } from '../../utility/generatedContent';
 import useIsMobile from '../../hooks/useMobile';
 import { renderIntoDocument } from 'react-dom/test-utils';
+import { ContactSection } from './Contact';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -123,6 +124,8 @@ export function BlogPost(props: BlogPostProps) {
           </Container>
         </div>
       </div>
+
+      <ContactSection />
     </>
   );
 }
@@ -221,6 +224,8 @@ export function BlogContainer(props: BlogContainerProps) {
         </div>
         <div className="h-2" />
       </div>
+
+      <ContactSection />
     </>
   );
 }

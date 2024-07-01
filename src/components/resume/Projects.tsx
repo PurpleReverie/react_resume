@@ -8,6 +8,7 @@ import useFetch from 'react-fetch-hook';
 import { getProjectPostURL } from '../../utility/generatedContent';
 import useIsMobile from '../../hooks/useMobile';
 import { format } from 'path';
+import { ContactSection } from './Contact';
 
 export interface ProjectMainResumeEntryProps {
   entry: ProjectEntryData;
@@ -158,6 +159,8 @@ export function ProjectContainer(props: ProjectContainerProps) {
         </div>
         <div className="h-2" />
       </div>
+
+      <ContactSection />
     </>
   );
 }
@@ -238,6 +241,7 @@ export function ProjectPost(props: ProjectPostProp) {
           </Container>
         </div>
       </div>
+      <ContactSection />
     </>
   );
 }

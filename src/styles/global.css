@@ -161,3 +161,7 @@ time {
 var {
   @apply italic;
 }
+
+button {
+  @apply outline outline-gray-200 m-1 p-1 px-4 rounded-lg cursor-pointer hover:bg-gray-200 active:bg-gray-300 
+}
