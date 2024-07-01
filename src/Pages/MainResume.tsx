@@ -61,12 +61,12 @@ export default function ResumeSection() {
       <section>
         <Container expand={true}>
           <h1>Taura J Greig</h1>
-          <p>Full Stack Software Engineer</p>
-          <p>+64211049888</p>
-          <p className="text-blue-500">
+          <h2>Full Stack Software Engineer</h2>
+          <h3>+64211049888</h3>
+          <h3 className="text-blue-500">
             <a href="mailto:taurajgreig@outlook.com">taurajgreig@outlook.com</a>
-          </p>
-          <p>Auckland, New Zealand</p>
+          </h3>
+          <h3>Auckland, New Zealand</h3>
         </Container>
         <Container>
           <p>
