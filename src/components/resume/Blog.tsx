@@ -40,8 +40,12 @@ export function BlogPostEntry(props: BlogPostProps) {
       expand={true}
       className="m-[8px] rounded-md hover:bg-gray-200 active:bg-gray-300 cursor-pointer"
     >
-      <p>{props.post.title}</p>
-      <p>{formatDate(new Date(props.post.date))}</p>
+      <h3>
+        <strong>{props.post.title}</strong>
+      </h3>
+      <p>
+        <strong>{formatDate(new Date(props.post.date))}</strong>
+      </p>
       <br />
       <p>{props.post.blurb}</p>
     </Container>
@@ -68,7 +72,7 @@ export function BlogPost(props: BlogPostProps) {
             navigate('/blog');
           }}
         >
-          Back to Blog
+          <strong>{'<-'} Back to Blog </strong>
         </button>
       </Container>
     </div>
@@ -76,9 +80,9 @@ export function BlogPost(props: BlogPostProps) {
 
   const renderTitle = () => (
     <Container expand={false} className="grow flex flex-col justify-center">
-      <p>{props.post.title}</p>
-      <p>{formatDate(new Date(props.post.date))}</p>
-      <p>{props.post.blurb}</p>
+      <h1>{props.post.title}</h1>
+      <h2>{formatDate(new Date(props.post.date))}</h2>
+      <h3>{props.post.blurb}</h3>
     </Container>
   );
   const renderImage = () => (
@@ -170,7 +174,7 @@ export function BlogContainer(props: BlogContainerProps) {
             navigate('/');
           }}
         >
-          Back to Home
+          <strong>{'<- '} Back to Home </strong>
         </button>
       </Container>
     </div>

@@ -22,14 +22,18 @@ export function WorkExperienceResumeEntry(
   return (
     <>
       <Container expand={true}>
-        <p>{props.entry.companyName}</p>
-        <p>{props.entry.title}</p>
+        <h2>{props.entry.companyName}</h2>
         <p>
-          {formatDate(props.entry.startDate)} -{' '}
-          {formatDate(props.entry.endDate)}
+          <strong>{props.entry.title}</strong>
+        </p>
+        <p>
+          {' '}
+          <strong>
+            {formatDate(props.entry.startDate)} -{' '}
+            {formatDate(props.entry.endDate)}
+          </strong>{' '}
         </p>
         <p>{props.entry.overview}</p>
-        <div className="h-4" />
         <div className="flex flex-col">
           {props.entry.projects.map((p, i) => (
             <div
@@ -49,7 +53,9 @@ export function WorkExperienceResumeEntry(
         <div className="flex flex-wrap flex-row justify-center">
           {props.entry.skills.map((s, i) => (
             <span className="m-2" key={i}>
-              {s}
+              <small>
+                <i>{s}</i>
+              </small>
             </span>
           ))}
         </div>

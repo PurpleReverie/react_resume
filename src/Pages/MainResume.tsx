@@ -84,15 +84,18 @@ export default function ResumeSection() {
             </Container>
           </div>
           <div className={firstSectionColumnStyle}>
-            <Container expand={true}>
-              <p>
-                A self-directed software engineer, interested in solving
-                problems and building solutions. Currently active as a fullstack
-                developer after many years of game development with Unity 3D,
-                building immersive software applications through production and
-                to release. Interested in getting in involved with unorthodox
-                software projects, involving in interdisciplinary collaboration.
-              </p>
+            <Container expand={true} className="flex flex-col justify-center">
+              <div className="px-6">
+                <h3>
+                  A self-directed software engineer, interested in solving
+                  problems and building solutions. Currently active as a
+                  fullstack developer after many years of game development with 
+                  Unity 3D, building immersive software applications through
+                  production and to release. Interested in getting in involved
+                  with unorthodox software projects, involving in
+                  interdisciplinary collaboration.
+                </h3>
+              </div>
             </Container>
           </div>
         </div>

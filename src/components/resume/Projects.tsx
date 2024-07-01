@@ -33,14 +33,21 @@ export function ProjectEntry(props: ProjectMainResumeEntryProps) {
         navigate(`/project/${props.entry.slug}`);
       }}
     >
-      <p>{props.entry.title}</p>
+      <h3>
+        <strong>{props.entry.title}</strong>
+      </h3>
       <p>
-        {formatDate(props.entry.startDate)} - {formatDate(props.entry.endDate)}
+        <strong>
+          {formatDate(props.entry.startDate)} -{' '}
+          {formatDate(props.entry.endDate)}
+        </strong>
       </p>
       <p>{props.entry.blurb}</p>
       <p>
-        {props.entry.skills.map((s) => (
-          <>{`${s} `}</>
+        {props.entry.skills.map((s, i) => (
+          <small key={i}>
+            <i>{`${s} `}</i>
+          </small>
         ))}
       </p>
       <p>{props.entry.company}</p>
@@ -103,7 +110,7 @@ export function ProjectContainer(props: ProjectContainerProps) {
             navigate('/');
           }}
         >
-          Back to Home
+          <strong> {'< -'} Back to Home </strong>
         </button>
       </Container>
     </div>
@@ -111,7 +118,7 @@ export function ProjectContainer(props: ProjectContainerProps) {
 
   const renderHeader = () => (
     <Container expand={false} className="grow flex flex-col justify-center">
-      <h1>Project I remember fondly!</h1>
+      <h1>Projects I remember fondly!</h1>
     </Container>
   );
 
@@ -179,7 +186,7 @@ export function ProjectPost(props: ProjectPostProp) {
             navigate('/project');
           }}
         >
-          Back to Projects List
+          <strong>{'<- '} Back to Projects List</strong>
         </button>
       </Container>
     </div>
@@ -187,12 +194,12 @@ export function ProjectPost(props: ProjectPostProp) {
 
   const renderHeader = () => (
     <Container expand={false} className="grow flex flex-col justify-center">
-      <p>{props.projectEntry.title}</p>
-      <p>
+      <h1>{props.projectEntry.title}</h1>
+      <h2>
         {formatDate(new Date(props.projectEntry.startDate))} -
         {formatDate(new Date(props.projectEntry.endDate))}
-      </p>
-      <p>{props.projectEntry.blurb}</p>
+      </h2>
+      <h3>{props.projectEntry.blurb}</h3>
     </Container>
   );
   const renderImage = () => (

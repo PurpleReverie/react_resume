@@ -6,6 +6,7 @@ import Container from './components/Container';
 import PageQuestions from './Pages/PageQuestions';
 import IntroSection from './components/introSection';
 import ResumeSection from './Pages/MainResume';
+import './styles/global.css';
 
 import ReactDOM from 'react-dom/client';
 import {
@@ -19,6 +20,7 @@ import { useEvent } from './hooks/useEvent';
 import { BlogPage } from './Pages/BlogPage';
 import ScrollToTop from './components/ScrollToTop';
 import { ProjectsPage } from './Pages/ProjectsPage';
+import { StylesExample } from './Pages/StylesExample';
 
 export interface ResumeContext {
   setResumeState: (state: string) => void;
@@ -53,6 +55,7 @@ function App() {
                 <Route path="project/:id" element={<ProjectsPage />} />
                 <Route path="intro" element={<IntroSection />} />
                 <Route path="questions" element={<PageQuestions />} />
+                <Route path="styles" element={<StylesExample />} />
               </Route>
             </Routes>
           </div>

@@ -86,7 +86,9 @@ export function ResumeSkillPopupContainer(
           className="cursor-default px-16 py-4"
           onClick={(e: unknown) => (e as Event).stopPropagation()}
         >
-          <p>{props.skill.name}</p>
+          <h3>
+            <strong>{props.skill.name}</strong>
+          </h3>
           <p>{props.skill.overview}</p>
           <br />
           <button

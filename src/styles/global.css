@@ -1,0 +1,163 @@
+/* src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optionally apply to all elements */
+* {
+    @apply font-sans;
+  }
+  
+
+/* Global styles for tags */
+h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+h2 {
+  @apply text-3xl font-semibold mb-3;
+}
+
+h3 {
+  @apply text-2xl font-medium mb-2;
+}
+
+p {
+  @apply text-base mb-4;
+}
+
+blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic;
+}
+
+pre {
+  @apply bg-gray-100 p-4 rounded;
+}
+
+b, strong {
+  @apply font-bold;
+}
+
+i, em {
+  @apply italic;
+}
+
+u {
+  @apply underline;
+}
+
+small {
+  @apply text-sm;
+}
+
+del {
+  @apply line-through;
+}
+
+ins {
+  @apply underline;
+}
+
+sub {
+  @apply align-sub text-xs;
+}
+
+sup {
+  @apply align-super text-xs;
+}
+
+code {
+  @apply bg-gray-200 p-1 rounded;
+}
+
+table {
+  @apply w-full border-collapse;
+}
+
+th, td {
+  @apply border border-gray-300 p-2;
+}
+
+ul {
+  @apply list-disc pl-5;
+}
+
+ol {
+  @apply list-decimal pl-5;
+}
+
+dl {
+  @apply space-y-2;
+}
+
+dt {
+  @apply font-bold;
+}
+
+dd {
+  @apply ml-4;
+}
+
+img {
+  @apply max-w-full h-auto;
+}
+
+a {
+    @apply text-blue-500 hover:underline;
+  }
+
+audio, video {
+  @apply w-full;
+}
+
+details {
+  @apply border border-gray-300 p-2 rounded;
+}
+
+dialog {
+  @apply border border-gray-300 p-4 rounded;
+}
+
+meter {
+  @apply w-full;
+}
+
+progress {
+  @apply w-full;
+}
+
+iframe, object, embed {
+  @apply w-full h-auto;
+}
+
+abbr {
+  @apply no-underline border-b border-gray-300 cursor-help;
+}
+
+address {
+  @apply not-italic;
+}
+
+cite {
+  @apply italic;
+}
+
+dfn {
+  @apply italic;
+}
+
+kbd {
+  @apply bg-gray-200 p-1 rounded;
+}
+
+samp {
+  @apply font-mono;
+}
+
+time {
+  @apply not-italic;
+}
+
+var {
+  @apply italic;
+}
