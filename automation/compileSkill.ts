@@ -13,9 +13,10 @@ function jsonToJsObjectString(jsonString: string) {
     const jsonObj = JSON.parse(jsonString);
 
     // Convert the JSON object to a formatted JavaScript string
-    const jsString = JSON.stringify(jsonObj, null, 2)
-      .replace(/"([^"]+)":/g, '$1:')
-      .replace(/"/g, "'");
+    const jsString = JSON.stringify(jsonObj, null, 2).replace(
+      /"([^"]+)":/g,
+      '$1:'
+    );
 
     return `${jsString};`;
   } catch (error) {

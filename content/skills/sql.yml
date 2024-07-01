@@ -1,0 +1,12 @@
+slug: sql
+name: SQL
+overview: >
+  SQL (Structured Query Language) is a standardized language used to manage and manipulate relational databases. It allows users to create, read, update, and delete data within database tables. SQL is essential for performing tasks such as querying for specific information, filtering results, joining tables, and managing database schemas. Widely used in various applications, SQL is a foundational tool for data management and analysis.
+
+  Realistically this is something I pick up for the job / project at hand, as I spend most of my time in C# or Typescript building features
+
+
+
+
+
+

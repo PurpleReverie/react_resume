@@ -1,0 +1,10 @@
+slug: aspnet
+name: ASPNet
+overview: >
+  ASP.NET is a web application framework developed by Microsoft as part of the .NET platform. It is used to build dynamic, data-driven websites and web services. ASP.NET supports various programming models, including MVC (Model-View-Controller), Web API, and Web Forms, providing flexibility and control over the development process. With features like server-side rendering, robust security, and seamless integration with other .NET components, ASP.NET simplifies the creation of scalable and high-performance web applications. Its latest iteration, ASP.NET Core, is cross-platform and optimized for modern web development, allowing deployment on Windows, macOS, and Linux.
+
+
+
+
+
+

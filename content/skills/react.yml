@@ -1,0 +1,12 @@
+slug: react
+name: React
+overview: >
+  React is a JavaScript library for building user interfaces. Developed by Facebook, it lets developers create reusable components and efficiently update the UI with its virtual DOM. It's popular for single-page applications due to its performance and flexibility.
+
+  The current resume web site you are viewing was built using react.
+
+
+
+
+
+

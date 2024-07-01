@@ -1,0 +1,4 @@
+slug: javascript
+name: Javascript
+overview: >
+  JavaScript is a versatile, high-level programming language primarily used for adding interactive elements to web pages. It runs in the browser and enables dynamic content, such as animations, form validations, and asynchronous data fetching. JavaScript is a core technology of the web, alongside HTML and CSS, and is essential for modern web development. With the advent of Node.js, it is also used for server-side programming, making it a full-stack language. Its flexibility, extensive libraries, and frameworks make JavaScript a fundamental tool for creating responsive and engaging web applications.

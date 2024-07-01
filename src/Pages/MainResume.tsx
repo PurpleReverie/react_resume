@@ -35,20 +35,21 @@ export default function ResumeSection() {
   const { skill } = useURLParams();
   const showSkill = skill !== undefined;
 
-  useEffect(() => {
-    const questionState = localStorage.getItem('questions_state');
-    console.log(questionState);
-    if (questionState === null || questionState === 'false') {
-      console.log('questions');
-      navigate('/questions');
-    } else {
-      setIsChecked(true);
-    }
-  }, [navigate]);
+  // TODO: going to turn on prompt later
+  // useEffect(() => {
+  //   const questionState = localStorage.getItem('questions_state');
+  //   console.log(questionState);
+  //   if (questionState === null || questionState === 'false') {
+  //     console.log('questions');
+  //     navigate('/questions');
+  //   } else {
+  //     setIsChecked(true);
+  //   }
+  // }, [navigate]);
 
-  if (!isChecked) {
-    return null; // or a loading spinner if you prefer
-  }
+  // if (!isChecked) {
+  //   return null; // or a loading spinner if you prefer
+  // }
 
   return (
     <div className={PageContainerStyle}>

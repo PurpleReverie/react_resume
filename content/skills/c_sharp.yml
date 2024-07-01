@@ -1,0 +1,4 @@
+slug: csharp
+name: C#
+overview: >
+  My language of choice. C# (C-sharp) is a modern, object-oriented programming language developed by Microsoft as part of the .NET framework. It is designed for building a wide range of applications, from web and desktop to mobile and gaming. C# combines the power of C++ with the ease of use of languages like Visual Basic, offering features such as strong typing, garbage collection, and support for modern programming paradigms like asynchronous programming and LINQ (Language Integrated Query). Its versatility, extensive standard library, and robust performance make C# a popular choice for developers.

@@ -1,0 +1,10 @@
+slug: graphql
+name: GraphQL
+overview: >
+  GraphQL is a query language for APIs and a runtime for executing those queries. Developed by Facebook, it allows clients to request exactly the data they need, making APIs more efficient and flexible. With GraphQL, developers can define the structure of the required data, reducing over-fetching and under-fetching issues common in REST APIs. It's widely used for its ability to streamline data fetching and improve the overall developer experience.
+
+
+
+
+
+

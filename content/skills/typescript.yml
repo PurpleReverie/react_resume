@@ -1,0 +1,10 @@
+slug: typescript
+name: Typescript
+overview: >
+  TypeScript is a statically typed superset of JavaScript developed by Microsoft. It adds optional static types to JavaScript, allowing for better tooling, error checking, and improved code quality. TypeScript code compiles to plain JavaScript, making it compatible with existing JavaScript frameworks and libraries. It is widely used for developing large-scale applications due to its ability to catch errors at compile time and enhance code maintainability.
+
+
+
+
+
+
