@@ -9,14 +9,9 @@ export function ContactPopup() {
   const useMobile = useIsMobile();
 
   const renderPopup = () => (
-    <div className="fixed inset-0 z-[2] w-full h-full flex flex-col justify-end">
-      <div className="flex flex-row justify-center">
-        {!useMobile && (
-          <div className={PageContainerStyle}>
-            <ContactSection overrideContainer={true} />
-          </div>
-        )}
-        {useMobile && <ContactSection overrideContainer={true} />}
+    <div className="fixed bottom-0 left-0 right-0 z-[2] w-full flex justify-center pointer-events-none">
+      <div className={`${!useMobile ? PageContainerStyle : ''} w-full`}>
+        <ContactSection overrideContainer={true} />
       </div>
     </div>
   );
@@ -25,7 +20,7 @@ export function ContactPopup() {
     if (scrollAmount > 10 && scrollAmount < 98) {
       return <>{renderPopup()}</>;
     } else {
-      return <></>;
+      return null;
     }
   };
 
@@ -66,13 +61,13 @@ export function ContactSection(props: ContactSectionProps) {
     <>
       {!renderFullBanner && (
         <Container expand={true} className="">
-          <div className="w-full h-full flex flex-row justify-between">
+          <div className="w-full h-full flex flex-row justify-between pointer-events-auto">
             {contents}
           </div>
         </Container>
       )}
       {renderFullBanner && (
-        <div className="w-full h-full flex flex-row justify-between bg-white p-2 pb-6">
+        <div className="w-full h-full flex flex-row justify-between bg-white p-2 pb-6 pointer-events-auto">
           {contents}
         </div>
       )}

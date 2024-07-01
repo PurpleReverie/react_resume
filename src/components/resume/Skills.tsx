@@ -2,6 +2,8 @@ import React from 'react';
 import Container from '../Container';
 import { useNavigate } from 'react-router-dom';
 import { userSkills } from '../../generated/skills.generated';
+import useIsMobile from '../../hooks/useMobile';
+import { PageContainerStyle } from '../../utility/styles';
 
 // TODO: create entries for skills, describing each of your skills and how you used it in the past
 
@@ -59,6 +61,8 @@ export function ResumeSkillPopupContainer(
   props: ResumeSkillPopupContainerProps,
 ) {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+
   if (props.skill === undefined) {
     console.log(props.skill);
     console.log('aborting');
@@ -74,7 +78,7 @@ export function ResumeSkillPopupContainer(
   };
 
   return (
-    <div className="fixed inset-0 z-[1]">
+    <div className="fixed inset-0 z-[4]">
       <div className="fixed w-full h-full bg-gray-800 opacity-70"></div>
       <div
         className="fixed w-full h-full flex justify-center items-center cursor-pointer"
@@ -82,23 +86,25 @@ export function ResumeSkillPopupContainer(
           closeSkillPopup();
         }}
       >
-        <Container
-          className="cursor-default px-16 py-4"
-          onClick={(e: unknown) => (e as Event).stopPropagation()}
-        >
-          <h3>
-            <strong>{props.skill.name}</strong>
-          </h3>
-          <p>{props.skill.overview}</p>
-          <br />
-          <button
-            onClick={() => {
-              closeSkillPopup();
-            }}
+        <div className={!isMobile ? PageContainerStyle : ''}>
+          <Container
+            className="cursor-default px-16 py-4"
+            onClick={(e: unknown) => (e as Event).stopPropagation()}
           >
-            Close
-          </button>
-        </Container>
+            <h3>
+              <strong>{props.skill.name}</strong>
+            </h3>
+            <p>{props.skill.overview}</p>
+            <br />
+            <button
+              onClick={() => {
+                closeSkillPopup();
+              }}
+            >
+              Close
+            </button>
+          </Container>
+        </div>
       </div>
     </div>
   );

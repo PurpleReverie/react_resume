@@ -68,12 +68,12 @@ export default function ResumeSection() {
             <h1>Taura J Greig</h1>
             <h2>Full Stack Software Engineer</h2>
             <h3>
-              <a href="tel:+64211049888">+64211049888</a>
-            </h3>
-            <h3 className="text-blue-500">
               <a href="mailto:taurajgreig@outlook.com">
                 taurajgreig@outlook.com
               </a>
+            </h3>
+            <h3>
+              <a href="tel:+64211049888">+64211049888</a>
             </h3>
             <h3>Auckland, New Zealand</h3>
           </Container>
