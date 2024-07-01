@@ -89,7 +89,7 @@ export default function ResumeSection() {
                 <h3>
                   A self-directed software engineer, interested in solving
                   problems and building solutions. Currently active as a
-                  fullstack developer after many years of game development with 
+                  fullstack developer after many years of game development with
                   Unity 3D, building immersive software applications through
                   production and to release. Interested in getting in involved
                   with unorthodox software projects, involving in
