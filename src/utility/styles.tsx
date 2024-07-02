@@ -8,6 +8,4 @@ export const questionButtonStyle = [
   'active:bg-gray-300',
 ].join(' ');
 
-export const PageContainerStyle = ['w-full', 'max-w-7xl', 'p-2', 'md:p-6'].join(
-  ' ',
-);
+export const PageContainerStyle = ['w-full', 'max-w-7xl'].join(' ');

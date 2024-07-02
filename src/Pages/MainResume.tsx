@@ -63,71 +63,55 @@ export default function ResumeSection() {
             skill={userSkills.find((s: SkillEntry) => s.slug === skill)}
           />
         )}
-        <section>
-          <Container expand={true}>
-            <h1>Taura J Greig</h1>
-            <h2>Full Stack Software Engineer</h2>
-            <h3>
-              <a href="mailto:taurajgreig@outlook.com">
-                taurajgreig@outlook.com
-              </a>
-            </h3>
-            <h3>
-              <a href="tel:+64211049888">+64211049888</a>
-            </h3>
-            <h3>Auckland, New Zealand</h3>
-          </Container>
-          <Container>
-            <p>
-              This Resume Portfolio site is a <b>WORK IN PROGRESS</b>. I AM a
-              full stack software engineer, and if you want to grab a copy of my
-              resume, please email me using the email address above
-            </p>
-          </Container>
-        </section>
-        <section>
-          <div className="flex md:flex-row justify-center flex-col">
-            <div className={firstSectionColumnStyle}>
-              <Container expand={true}>
-                <img src={'/profilePic.webp'} />
-              </Container>
-            </div>
-            <div className={firstSectionColumnStyle}>
-              <Container expand={true} className="flex flex-col justify-center">
-                <div className="px-6">
-                  <h3>
-                    A self-directed software engineer, interested in solving
-                    problems and building solutions. Currently active as a
-                    fullstack developer after many years of game development
-                    with Unity 3D, building immersive software applications
-                    through production and to release. Interested in getting in
-                    involved with unorthodox software projects, involving in
-                    interdisciplinary collaboration.
-                  </h3>
-                </div>
-              </Container>
-            </div>
+        <Container expand={true}>
+          <h1>Taura J Greig</h1>
+          <h2>Full Stack Software Engineer</h2>
+          <h3>
+            <a href="mailto:taurajgreig@outlook.com">taurajgreig@outlook.com</a>
+          </h3>
+          <h3>
+            <a href="tel:+64211049888">+64211049888</a>
+          </h3>
+          <h3>Auckland, New Zealand</h3>
+        </Container>
+        <Container>
+          <p>
+            This Resume Portfolio site is a <b>WORK IN PROGRESS</b>. I AM a full
+            stack software engineer, and if you want to grab a copy of my
+            resume, please email me using the email address above
+          </p>
+        </Container>
+        <div className="flex md:flex-row justify-center flex-col">
+          <div className={firstSectionColumnStyle}>
+            <Container expand={true}>
+              <img src={'/profilePic.webp'} />
+            </Container>
           </div>
-        </section>
+          <div className={firstSectionColumnStyle}>
+            <Container expand={true} className="flex flex-col justify-center">
+              <div className="px-6">
+                <h3>
+                  A self-directed software engineer, interested in solving
+                  problems and building solutions. Currently active as a
+                  fullstack developer after many years of game development with
+                  Unity 3D, building immersive software applications through
+                  production and to release. Interested in getting in involved
+                  with unorthodox software projects, involving in
+                  interdisciplinary collaboration.
+                </h3>
+              </div>
+            </Container>
+          </div>
+        </div>
         <hr className={hrStyle} />
-        <section>
-          <WorkExperienceResumeContainer entrys={userWorkExperience} />
-        </section>
+        <WorkExperienceResumeContainer entrys={userWorkExperience} />
         <hr className={hrStyle} />
-        <section>
-          <ResumeSkillsContainer />
-        </section>
+        <ResumeSkillsContainer />
         <hr className={hrStyle} />
-        <section>
-          <BlogResumeContainer posts={userBlogManifest} />
-        </section>
+        <BlogResumeContainer posts={userBlogManifest} />
         <hr className={hrStyle} />
-        <section>
-          <ProjectMainResumeContainer entrys={userProjectManifest()} />
-        </section>
-        <section>
-          <ContactSection />
-        </section>
+        <ProjectMainResumeContainer entrys={userProjectManifest()} />
+        <ContactSection />
       </div>
     </>
   );
