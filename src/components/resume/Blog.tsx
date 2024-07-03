@@ -11,6 +11,7 @@ import { getBlogPostURL } from '../../utility/generatedContent';
 import useIsMobile from '../../hooks/useMobile';
 import { renderIntoDocument } from 'react-dom/test-utils';
 import { ContactSection } from './Contact';
+import '../../styles/markldown_blog_content.css';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -116,7 +117,7 @@ export function BlogPost(props: BlogPostProps) {
       <hr className="w-48 mx-auto" />
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
         <div className={'md:px-16 px-0'}>
-          <Container expand={true}>
+          <Container expand={true} className="markdown_override">
             {/* <p>{props.post.post}</p> */}
             {mdRequest.isLoading || (
               <ReactMarkdown>{mdRequest.data}</ReactMarkdown>

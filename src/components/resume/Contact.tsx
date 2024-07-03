@@ -48,7 +48,7 @@ export function ContactSection(props: ContactSectionProps) {
         </button>
         <button
           onClick={() => {
-            window.location.href = 'mailto:taurajgreig@outlook.com';
+            window.location.href = 'mailto:tauraj.pro@gmail.com';
           }}
         >
           Email

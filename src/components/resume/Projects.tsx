@@ -234,7 +234,7 @@ export function ProjectPost(props: ProjectPostProp) {
       <hr className="w-48 mx-auto" />
       <div className={'my-4 bg-[#000000] bg-opacity-20 pb-[12px] rounded-lg'}>
         <div className={'md:px-16 px-0'}>
-          <Container expand={true}>
+          <Container expand={true} className="markdown_override">
             {mdRequest.isLoading || (
               <ReactMarkdown>{mdRequest.data as string}</ReactMarkdown>
             )}
