@@ -14,7 +14,7 @@ export function WorkExperienceResumeEntry(
     const date = new Date(dateNumber);
     const year = date.getFullYear();
     const month = date.toLocaleString('default', { month: 'long' }); // Use 'short' for abbreviated month name
-    const formattedDate = `${year} ${month}`;
+    const formattedDate = `${year}`;
 
     return formattedDate;
   };
